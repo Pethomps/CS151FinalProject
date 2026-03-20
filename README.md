@@ -32,3 +32,10 @@ main       abc1234 [origin/main] some commit message
 newBranch  def5678 [origin/newBranch] your commit message
 ```
 ###### `origin` is the "remote" (ie. Github)
+
+### Testing
+- Download this:   
+        `wget https://raw.githubusercontent.com/catchorg/Catch2/devel/extras/catch_amalgamated.hpp`
+- Then this:   
+        `wget https://raw.githubusercontent.com/catchorg/Catch2/devel/extras/catch_amalgamated.cpp`
+- Mac users: `www.idk.figureitout.com`
