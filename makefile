@@ -1,7 +1,7 @@
 CFLAGS = g++ -Wall -std=c++17 -pedantic-errors
 
-game: obj/main.o obj/game.o
-	$(CFLAGS) obj/main.o obj/game.o -o game
+game: obj/main.o obj/game.o obj/button.o obj/target.o obj/weapon.o obj/welcome.o obj/play.o obj/results.o obj/states.o
+	$(CFLAGS) $^ -o game
 
 obj/main.o: src/main.cpp header/game.h
 	$(CFLAGS) -c src/main.cpp -o obj/main.o

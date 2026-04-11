@@ -55,7 +55,7 @@ Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Colo
     // set size as a ratio of original size
     mButton.setScale(size.x/imageSize.x, size.y/imageSize.y);
     // Load font
-    if (!mFont.loadFromFile("./Images/Font/VintageCharm-Regular.otf"))
+    if (!mFont.loadFromFile("../Fonts/VintageCharm-Regular.otf"))
     {
         std::cout<<"Error opening font file\n";
         exit(2);
