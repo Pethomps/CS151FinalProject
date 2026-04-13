@@ -6,7 +6,7 @@
 
 
 #### Contributions
-- Jonathan:  Implemented button class.
-- Pamela:    Added comands for makefile and implemented backgound class.
-- Ray:       
-- Adia:      Set up file system and outlines for classes.
+- _Jonathan_:  Implemented button class.
+- _Pamela_:    Added comands for makefile and implemented backgound class.
+- _Ray_:       
+- _Adia_:      Set up file system and outlines for classes.
