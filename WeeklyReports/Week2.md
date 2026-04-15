@@ -8,5 +8,5 @@
 #### Contributions
 - _Jonathan_:  Implemented button class.
 - _Pamela_:    Added comands for makefile and implemented backgound class.
-- _Ray_:       
+- _Ray_:       wrote titles functions for weapons class			
 - _Adia_:      Set up file system and outlines for classes.
