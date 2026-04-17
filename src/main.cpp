@@ -9,6 +9,9 @@
  * 
  */
 #include "../header/game.h"
+#include "../header/background.h"
+#include "../header/button.h"
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "weapon.h"
 #include "target.h"
@@ -98,6 +101,30 @@ int main()
 
         target.render(window);
 
+        window.display();
+    }
+
+    // Testing backgorund class
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
+
+    Background background;
+    background.loadFile("Images/Background/Background1.png", window);
+
+    
+
+    while(window.isOpen())
+    {
+        sf::Event event;
+        while(window.pollEvent(event))
+        {
+            if(event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+        }
+
+        window.clear();
+        background.draw(window);
         window.display();
     }
 

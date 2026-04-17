@@ -1,8 +1,8 @@
 #ifndef PLAY_H
 #define PLAY_H
-#include "states.h"
-#include "button.h"
-#include "target.h"
+#include "../header/states.h"
+#include "../header/button.h"
+#include "../header/target.h"
 
 class Play
 {
@@ -18,7 +18,7 @@ private:
     Button mRestart;  
     Button mRules;
     Button mResults;
-    Button mExit;
+    Button mQuit;
     sf::RectangleShape mFrame;
 };
 
