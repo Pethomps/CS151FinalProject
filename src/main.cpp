@@ -10,8 +10,96 @@
  */
 #include "../header/game.h"
 #include <iostream>
+#include "weapon.h"
+#include "target.h"
+
 
 int main()
 {
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
+    window.setFramerateLimit(60);
 
+    sf::Texture backgroundTexture;
+
+   if (!backgroundTexture.loadFromFile("Background1.png"))
+    {
+        std::cout << "Failed to load background.png\n";
+        return 1;
+    }
+
+    sf::Sprite backgroundSprite(backgroundTexture);
+
+    backgroundSprite.setScale(
+        static_cast<float>(window.getSize().x) / backgroundTexture.getSize().x,
+        static_cast<float>(window.getSize().y) / backgroundTexture.getSize().y);
+
+    sf::Clock clock;
+
+    Weapon gun(sf::Vector2f(60.f, 500.f), 500.f);
+    Target target(600.f, 300.f, 30.f);
+
+    bool bulletExists = false;
+    Bullet bullet(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), 0.f);
+
+    while (window.isOpen())
+    {
+        float dt = clock.restart().asSeconds();
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    sf::Vector2i mousePixel = sf::Mouse::getPosition(window);
+                    sf::Vector2f mouseWorld = window.mapPixelToCoords(mousePixel);
+
+                    bullet = gun.fireAt(mouseWorld);
+                    bulletExists = true;
+
+                    std::cout << "Bullet fired" << std::endl;
+                }
+            }
+        }
+
+        if (bulletExists)
+        {
+            if (bullet.isAlive())
+            {
+                bullet.update(dt);
+
+                if (target.isAlive())
+                {
+                    if (bullet.getBounds().intersects(target.getBounds()))
+                    {
+                        bullet.destroy();
+                        target.destroy();
+                        std::cout << "Target hit" << std::endl;
+                    }
+                }
+            }
+        }
+
+        window.clear();
+
+        gun.render(window);
+        window.draw(backgroundSprite);
+
+        if (bulletExists)
+        {
+            bullet.render(window);
+        }
+
+        target.render(window);
+
+        window.display();
+    }
+
+    return 0;
 }
