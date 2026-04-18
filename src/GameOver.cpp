@@ -30,8 +30,8 @@ GameOver::GameOver(sf::RenderWindow& window)
 
 
     // Play again text
-    mFontPlay.loadFromFile("Fonts/VintageCharm-Regular.otf");
-    mPlayAgain.setFont(mFontPlay);
+    //mFontPlay.loadFromFile("Fonts/VintageCharm-Regular.otf");
+    mPlayAgain.setFont(mFont);
     mPlayAgain.setString("Press enter to play again");
     mPlayAgain.setCharacterSize(20);
     mPlayAgain.setFillColor(sf::Color(2, 70, 105));
