@@ -18,7 +18,7 @@ private:
     Button mRestart;  
     Button mRules;
     Button mResults;
-    Button mExit;
+    Button mQuit;
     sf::RectangleShape mFrame;
 };
 

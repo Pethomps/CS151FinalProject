@@ -6,6 +6,7 @@
  */
 
 #include "../header/button.h"
+#include <SFML/Graphics.hpp>
 
 
 

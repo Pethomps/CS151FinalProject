@@ -1,12 +1,5 @@
 #include "../header/game.h"
 
-Game::Game()
-{
-
-}
-Game::~Game(){
-
-}
 
 void Game::handleInput(sf::RenderWindow &mWindow)
 {

@@ -11,8 +11,8 @@
 
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
-#include <SFML/Graphics.hpp>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 class Background{
 public:
@@ -20,6 +20,7 @@ public:
     ~Background(){};
 
     void loadFile(const std::string& pngName, sf::RenderWindow& window);
+    void resizePic(sf::Vector2u windowSize);
     void draw(sf::RenderWindow& window);
 
 private:
