@@ -3,7 +3,7 @@
 Welcome::Welcome()
 {
     // load font
-    if(mFont.loadFromFile("../assets/Fonts/VintageCharm-Regular.otf")){
+    if(!mFont.loadFromFile("assets/Fonts/VintageCharm-Regular.otf")){
         std::cout<<"Welcome: error opening .otf file\n"; // use throw instead?
         exit(1);
     }
@@ -18,8 +18,8 @@ Welcome::Welcome()
     mRules.setPosition({10,30});
 
     mStart.setText("start");
-    mStart.setPosition({580, 450});
-    mStart.setSize({60, 20});
+    mStart.setPosition({300, 300});
+    mStart.setSize({80, 80});
     mStart.setColorTextNormal(sf::Color::Blue);
     //mStart.setColor(sf::Color(255,255,255));
 }
