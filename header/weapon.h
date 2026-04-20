@@ -2,6 +2,7 @@
 #define WEAPON_H
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 class Bullet
 {

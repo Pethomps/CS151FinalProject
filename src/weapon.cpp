@@ -1,4 +1,6 @@
 #include "../header/weapon.h"
+#include <SFML/Graphics.hpp>
+#include <cmath>
 
 
     Weapon::Weapon(sf::Vector2f muzzlePosition, float bulletSpeed)
@@ -29,7 +31,7 @@
         gunShape.setFillColor(sf::Color::Green);
         window.draw(gunShape);
     }
-};
+
 
     Bullet::Bullet(sf::Vector2f startPos, sf::Vector2f direction, float speed)
         : mAlive(true)
@@ -54,18 +56,17 @@
         }
     }
 
-    sf::FloatRect getBounds() const
+    sf::FloatRect Bullet::getBounds() const
     {
         return mShape.getGlobalBounds();
     }
 
-    bool isAlive() const
+    bool Bullet::isAlive() const
     {
         return mAlive;
     }
 
-    void destroy()
+    void Bullet::destroy()
     {
         mAlive = false;
     }
-};
