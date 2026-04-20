@@ -1,8 +1,8 @@
 #ifndef PLAY_H
 #define PLAY_H
-#include "../header/states.h"
-#include "../header/button.h"
-#include "../header/target.h"
+#include "states.h"
+#include "button.h"
+#include "target.h"
 
 class Play
 {

@@ -1,6 +1,4 @@
 #include "../header/weapon.h"
-#include <SFML/Graphics.hpp>
-#include <cmath>
 
 
     Weapon::Weapon(sf::Vector2f muzzlePosition, float bulletSpeed)

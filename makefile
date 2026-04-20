@@ -1,8 +1,9 @@
 CFLAGS = g++ -Wall -std=c++17 -pedantic-errors 
 #obj/game.o obj/button.o obj/target.o obj/weapon.o obj/welcome.o obj/play.o obj/results.o obj/states.o obj/background.o
-game: obj/main.o obj/background.o obj/button.o obj/GameOver.o
+game: obj/main.o obj/background.o obj/button.o obj/GameOver.o \
+      obj/game.o obj/weapon.o obj/target.o obj/welcome.o \
+      obj/play.o obj/results.o obj/states.o
 	$(CFLAGS) $^ -o game -lsfml-graphics -lsfml-window -lsfml-system
-
 obj/main.o: src/main.cpp header/game.h
 	$(CFLAGS) -c src/main.cpp -o obj/main.o
 

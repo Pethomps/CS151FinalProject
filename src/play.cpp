@@ -5,7 +5,7 @@
  * 
  */
 #include "../header/play.h"
-
+#include "../header/target.h"
 
 
 /**
@@ -22,7 +22,7 @@ Play::Play()
     mFrame.setOutlineThickness(5);
 
     // Target mTarget;
-    mTarget.setBoundary(30, 20, 580, 400);
+    // mTarget.setBoundary(30, 20, 580, 400);
     
     // Button mRestart;  
     mRestart.setPosition(sf::Vector2f(420,450));
@@ -84,7 +84,7 @@ State Play::handleInput(sf::Event &e, sf::RenderWindow &window)
 void Play::update(double elapsedTime, sf::RenderWindow &window)
 {
     // Target mTarget;Button mRestart;Button mRules;Button mResults;Button mQuit;
-    mTarget.update(elapsedTime, window);
+    // mTarget.update(elapsedTime, window);
     mRestart.update();
     mRules.update();
     mResults.update();

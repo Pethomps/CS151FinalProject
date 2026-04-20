@@ -10,6 +10,7 @@ private:
     bool mAlive;
 
 public:
+    Target(){};
     Target(float x, float y, float radius);
 
     void render(sf::RenderWindow& window) const;
