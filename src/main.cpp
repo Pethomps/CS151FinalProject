@@ -15,94 +15,95 @@
 #include <iostream>
 #include "../header/target.h"
 #include "../header/weapon.h"
+#include "../header/welcome.h"
 
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
-    window.setFramerateLimit(60);
+//     sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
+//     window.setFramerateLimit(60);
 
-    sf::Texture backgroundTexture;
+//     sf::Texture backgroundTexture;
 
-   if (!backgroundTexture.loadFromFile("Images/Background/Background1.png"))
-    {
-        std::cout << "Failed to load background.png\n";
-        return 1;
-    }
+//    if (!backgroundTexture.loadFromFile("Images/Background/Background1.png"))
+//     {
+//         std::cout << "Failed to load background.png\n";
+//         return 1;
+//     }
 
-    sf::Sprite backgroundSprite(backgroundTexture);
+//     sf::Sprite backgroundSprite(backgroundTexture);
 
-    backgroundSprite.setScale(
-        static_cast<float>(window.getSize().x) / backgroundTexture.getSize().x,
-        static_cast<float>(window.getSize().y) / backgroundTexture.getSize().y);
+//     backgroundSprite.setScale(
+//         static_cast<float>(window.getSize().x) / backgroundTexture.getSize().x,
+//         static_cast<float>(window.getSize().y) / backgroundTexture.getSize().y);
 
-    sf::Clock clock;
+//     sf::Clock clock;
 
-    Weapon gun(sf::Vector2f(60.f, 500.f), 500.f);
-    Target target(600.f, 300.f, 30.f);
+//     Weapon gun(sf::Vector2f(60.f, 500.f), 500.f);
+//     Target target(600.f, 300.f, 30.f);
 
-    bool bulletExists = false;
-    Bullet bullet(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), 0.f);
+//     bool bulletExists = false;
+//     Bullet bullet(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), 0.f);
 
-    while (window.isOpen())
-    {
-        float dt = clock.restart().asSeconds();
+//     while (window.isOpen())
+//     {
+//         float dt = clock.restart().asSeconds();
 
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();
-            }
+//         sf::Event event;
+//         while (window.pollEvent(event))
+//         {
+//             if (event.type == sf::Event::Closed)
+//             {
+//                 window.close();
+//             }
 
-            if (event.type == sf::Event::MouseButtonPressed)
-            {
-                if (event.mouseButton.button == sf::Mouse::Left)
-                {
-                    sf::Vector2i mousePixel = sf::Mouse::getPosition(window);
-                    sf::Vector2f mouseWorld = window.mapPixelToCoords(mousePixel);
+//             if (event.type == sf::Event::MouseButtonPressed)
+//             {
+//                 if (event.mouseButton.button == sf::Mouse::Left)
+//                 {
+//                     sf::Vector2i mousePixel = sf::Mouse::getPosition(window);
+//                     sf::Vector2f mouseWorld = window.mapPixelToCoords(mousePixel);
 
-                    bullet = gun.fireAt(mouseWorld);
-                    bulletExists = true;
+//                     bullet = gun.fireAt(mouseWorld);
+//                     bulletExists = true;
 
-                    std::cout << "Bullet fired" << std::endl;
-                }
-            }
-        }
+//                     std::cout << "Bullet fired" << std::endl;
+//                 }
+//             }
+//         }
 
-        if (bulletExists)
-        {
-            if (bullet.isAlive())
-            {
-                bullet.update(dt);
+//         if (bulletExists)
+//         {
+//             if (bullet.isAlive())
+//             {
+//                 bullet.update(dt);
 
-                if (target.isAlive())
-                {
-                    if (bullet.getBounds().intersects(target.getBounds()))
-                    {
-                        bullet.destroy();
-                        target.destroy();
-                        std::cout << "Target hit" << std::endl;
-                    }
-                }
-            }
-        }
+//                 if (target.isAlive())
+//                 {
+//                     if (bullet.getBounds().intersects(target.getBounds()))
+//                     {
+//                         bullet.destroy();
+//                         target.destroy();
+//                         std::cout << "Target hit" << std::endl;
+//                     }
+//                 }
+//             }
+//         }
 
-        window.clear();
+//         window.clear();
 
-        gun.render(window);
-        window.draw(backgroundSprite);
+//         gun.render(window);
+//         window.draw(backgroundSprite);
 
-        if (bulletExists)
-        {
-            bullet.render(window);
-        }
+//         if (bulletExists)
+//         {
+//             bullet.render(window);
+//         }
 
-        target.render(window);
+//         target.render(window);
 
-        window.display();
-    }
+//         window.display();
+//     }
 
     // Testing backgorund class
     // sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
@@ -127,6 +128,30 @@ int main()
     //     background.draw(window);
     //     window.display();
     // }
+
+    // TEST welcome
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Welcome Class Test");
+
+    Welcome welcome;
+
+    
+
+    while(window.isOpen())
+    {
+        sf::Event event;
+        while(window.pollEvent(event))
+        {
+            if(event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+        }
+
+        window.clear();
+        welcome.render(window);
+        window.display();
+    }
+    
 
     return 0;
 }
