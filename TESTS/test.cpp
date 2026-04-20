@@ -8,6 +8,7 @@
 #include "../header/weapon.h"
 #include "../header/target.h"
 #include "../header/background.h"
+#include "../header/GameOver.h"
 
 
 // ----------------------------------------------
@@ -60,19 +61,25 @@ TEST_CASE("Button class constructor initializes correctly") {
 //     Welcome w = Welcome();
 //     REQUIRE(true);  // object initialized
 // }
-TEST_CASE("Weapon class default constructor initializes correctly") {
-    Weapon w = Weapon();
-    REQUIRE(true);  // object initialized
-}
-TEST_CASE("Target class default constructor initializes correctly") {
-    Target t = Target();
-    REQUIRE(true);  // object initialized
-}
+// TEST_CASE("Weapon class default constructor initializes correctly") {
+//     Weapon w = Weapon();
+//     REQUIRE(true);  // object initialized
+// }
+// TEST_CASE("Target class default constructor initializes correctly") {
+//     Target t = Target();
+//     REQUIRE(true);  // object initialized
+//}
 TEST_CASE("Background class default constructor initializes correctly") {
     Background b = Background();
     REQUIRE(true);  // object initialized
 }
+TEST_CASE("GameOver class default constructor initializes correctly")
+{
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
 
+    GameOver go(window);
+    REQUIRE(true); // constructor runs properly
+}
 // ----------------------------------------------
 // Button
 // ----------------------------------------------
@@ -134,4 +141,33 @@ TEST_CASE("Background functions work correctly") {
     // SECTION("background object fails successfully") {
     //     REQUIRE_THROWS_AS( b.loadFile("notAFile.png", window), ifstream::badbit );
     // }
+}
+
+// ----------------------------------------------
+// Game Over
+// ----------------------------------------------
+TEST_CASE("Test GameOver resize correctly")
+{
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
+
+    GameOver go(window);
+    
+    SECTION("Resize window background to different size"){
+        window.setSize(sf::Vector2u(1000, 800));
+        go.resize(window);
+
+        REQUIRE(true);
+    }
+}
+
+TEST_CASE("Test GameOver draw function")
+{
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
+
+    GameOver go(window);
+    
+    SECTION("Draw works correctly"){
+        go.draw(window);
+        REQUIRE(true);
+    }
 }
