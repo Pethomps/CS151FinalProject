@@ -1,12 +1,28 @@
 #ifndef GAME_H
 #define GAME_H
 #include <SFML/Graphics.hpp>
+#include "states.h"
+#include "welcome.h"
+#include "play.h"
+#include "results.h"
+
 
 
 class Game 
 {
-    void handleInput(sf::RenderWindow &mWindow);
-    void update(double elapsedTime, sf::RenderWindow &mWindow);
-    void render(sf::RenderWindow &mWindow);
+public:
+    Game();
+    ~Game(){}
+
+    void handleInput(sf::RenderWindow &window);
+    void update(double elapsedTime, sf::RenderWindow &window);
+    void render(sf::RenderWindow &window);
+
+private:
+    State mGameState;
+    Welcome mWelcomeScreen;
+    Play mGame;
+    Results mResults;
+
 };
 #endif

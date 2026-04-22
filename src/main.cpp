@@ -20,6 +20,21 @@
 
 int main()
 {
+    // !!!!!!GAME CLASS IMPLEMENTATION!!!!
+    sf::RenderWindow window(sf::VideoMode(640,480),"My Game");
+    window.setPosition({50,50});
+    Game game;
+
+    sf::Clock clock;
+
+    while(window.isOpen())
+    {
+        float dt = clock.restart().asSeconds();
+        game.handleInput(window);
+        game.update(dt,window);
+        game.render(window);
+    }
+
 //     sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
 //     window.setFramerateLimit(60);
 
@@ -130,27 +145,27 @@ int main()
     // }
 
     // TEST welcome
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Welcome Class Test");
+    // sf::RenderWindow window(sf::VideoMode(800, 600), "Welcome Class Test");
 
-    Welcome welcome;
+    // Welcome welcome;
 
     
 
-    while(window.isOpen())
-    {
-        sf::Event event;
-        while(window.pollEvent(event))
-        {
-            if(event.type == sf::Event::Closed)
-            {
-                window.close();
-            }
-        }
+    // while(window.isOpen())
+    // {
+    //     sf::Event event;
+    //     while(window.pollEvent(event))
+    //     {
+    //         if(event.type == sf::Event::Closed)
+    //         {
+    //             window.close();
+    //         }
+    //     }
 
-        window.clear();
-        welcome.render(window);
-        window.display();
-    }
+    //     window.clear();
+    //     welcome.render(window);
+    //     window.display();
+    // }
     
 
     return 0;
