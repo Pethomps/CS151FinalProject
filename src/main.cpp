@@ -24,7 +24,7 @@ int main()
 
     sf::Texture backgroundTexture;
 
-   if (!backgroundTexture.loadFromFile("Images/Background/Background1.png"))
+   if (!backgroundTexture.loadFromFile("assets/Background/Background1.png"))
     {
         std::cout << "Failed to load background.png\n";
         return 1;
@@ -103,30 +103,6 @@ int main()
 
         window.display();
     }
-
-    // Testing backgorund class
-    // sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
-
-    // Background background;
-    // background.loadFile("Images/Background/Background1.png", window);
-
     
-
-    // while(window.isOpen())
-    // {
-    //     sf::Event event;
-    //     while(window.pollEvent(event))
-    //     {
-    //         if(event.type == sf::Event::Closed)
-    //         {
-    //             window.close();
-    //         }
-    //     }
-
-    //     window.clear();
-    //     background.draw(window);
-    //     window.display();
-    // }
-
     return 0;
 }

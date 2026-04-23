@@ -17,10 +17,10 @@ GameOver::GameOver()
 GameOver::GameOver(sf::RenderWindow& window)
 {
     // game over background
-    mBackground.loadFile("Images/Background/GameOverBackground.png", window);
+    mBackground.loadFile("../assets/Images/Background/GameOverBackground.png", window);
     
     // Title
-    mFont.loadFromFile("Fonts/Gameplay.ttf");
+    mFont.loadFromFile("../assets/Fonts/Gameplay.ttf");
     mTitle.setFont(mFont);
     mTitle.setString("GAME OVER");
     mTitle.setCharacterSize(75);
@@ -30,7 +30,7 @@ GameOver::GameOver(sf::RenderWindow& window)
 
 
     // Play again text
-    //mFontPlay.loadFromFile("Fonts/VintageCharm-Regular.otf");
+    //mFontPlay.loadFromFile("assets/Fonts/VintageCharm-Regular.otf");
     mPlayAgain.setFont(mFont);
     mPlayAgain.setString("Press enter to play again");
     mPlayAgain.setCharacterSize(20);

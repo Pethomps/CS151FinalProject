@@ -134,7 +134,7 @@ TEST_CASE("Background functions work correctly") {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
 
     SECTION("background object loads file successfully") {
-        b.loadFile("Background1.png", window);
+        b.loadFile("../assets/Background1.png", window);
         REQUIRE(true);
     }
     // We can test for failure-to-load-file if it throws an exception instead of exit(1)
