@@ -14,7 +14,6 @@ class Play
 
 
     private:
-        Target mTarget;
         Button mRestart;
         Button mResults;
         Button mQuit;

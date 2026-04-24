@@ -91,7 +91,7 @@ void Play::update(double elapsedTime, sf::RenderWindow &window)
 void Play::render(sf::RenderWindow &window)
 {
     // std::cout<<"---Play render()---"<<std::endl;
-    mTarget.render(window);
+    // mTarget.render(window);
     window.draw(mFrame);
     window.draw(mRestart);
     window.draw(mResults);

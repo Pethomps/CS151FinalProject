@@ -24,7 +24,7 @@ int main()
 
     sf::Texture backgroundTexture;
 
-   if (!backgroundTexture.loadFromFile("assets/Background/Background1.png"))
+   if (!backgroundTexture.loadFromFile("assets/Images/Background1.png"))
     {
         std::cout << "Failed to load background.png\n";
         return 1;
