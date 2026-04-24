@@ -22,8 +22,19 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
     window.setFramerateLimit(60);
 
-    Background background;
-    background.loadFile("Images/Background/Background2.png", window);
+    sf::Texture backgroundTexture;
+
+   if (!backgroundTexture.loadFromFile("assets/Background/Background1.png"))
+    {
+        std::cout << "Failed to load background.png\n";
+        return 1;
+    }
+
+    sf::Sprite backgroundSprite(backgroundTexture);
+
+    backgroundSprite.setScale(
+        static_cast<float>(window.getSize().x) / backgroundTexture.getSize().x,
+        static_cast<float>(window.getSize().y) / backgroundTexture.getSize().y);
 
     sf::Clock clock;
 
@@ -111,6 +122,6 @@ int main()
 
         window.display();
     }
-
+    
     return 0;
 }
