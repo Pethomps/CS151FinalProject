@@ -1,7 +1,7 @@
 #include "../header/results.h"
 Results::Results()
 {
-    if (!mFont.loadFromFile("./assets/college.ttf"))
+    if (!mFont.loadFromFile("./assets/VintageCharm-Regular.otf"))
     {
         std::cout<<"Error opening file\n";
         exit(2);
@@ -10,16 +10,15 @@ Results::Results()
     mResults.setCharacterSize(60);
     mResults.setString("Results");
 
-    mRules.setPosition(sf::Vector2f(60, 450));
-    mRules.setSize(sf::Vector2f(60, 20));
-    mRules.setText("Play Again");
-    mRules.setColorTextNormal(sf::Color::Blue);
+    mScores.setPosition(sf::Vector2f(60, 450));
+    mScores.setSize(sf::Vector2f(60, 20));
+    mScores.setText("Score");
+    mScores.setColorTextNormal(sf::Color::Blue);
     
     mPlayAgain.setPosition(sf::Vector2f(320, 450));
     mPlayAgain.setSize(sf::Vector2f(60, 20));
     mPlayAgain.setText("Play Again");
     mPlayAgain.setColorTextNormal(sf::Color::Blue);
-
 
     mLeave.setPosition(sf::Vector2f(580, 450));
     mLeave.setSize(sf::Vector2f(60, 20));
@@ -31,7 +30,7 @@ State Results::handleInput(sf::Event &e, sf::RenderWindow &window)
     if (mPlayAgain.handleInput(e, window)){
         return game;
     }
-    if (mRules.handleInput(e, window)){
+    if (mScores.handleInput(e, window)){
         return welcome;
     }
     if (mLeave.handleInput(e, window)){
@@ -41,14 +40,14 @@ State Results::handleInput(sf::Event &e, sf::RenderWindow &window)
 }
 void Results::update()
 {
-    mRules.update();
+    mScores.update();
     mPlayAgain.update();
     mLeave.update();  
 }
 void Results::render(sf::RenderWindow &window)
 {
     window.draw(mResults);
-    window.draw(mRules);
+    window.draw(mScores);
     window.draw(mPlayAgain);
     window.draw(mLeave);
 }
