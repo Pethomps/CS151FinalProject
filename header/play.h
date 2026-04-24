@@ -6,20 +6,19 @@
 
 class Play
 {
-public:
-    Play();
-    State handleInput(sf::Event& e,  sf::RenderWindow& window);
-    void update(double elapsedTime, sf::RenderWindow& window);
-    void render(sf::RenderWindow& window);
+    public:
+        Play();
+        State handleInput(sf::Event& e,  sf::RenderWindow& window);
+        void update(double elapsedTime, sf::RenderWindow& window);
+        void render(sf::RenderWindow& window);
 
 
-private:
-    Target mTarget;
-    Button mRestart;  
-    Button mRules;
-    Button mResults;
-    Button mQuit;
-    sf::RectangleShape mFrame;
+    private:
+        Target mTarget;
+        Button mRestart;
+        Button mResults;
+        Button mQuit;
+        sf::RectangleShape mFrame;
 };
 
 #endif
