@@ -5,26 +5,25 @@
  * @version 0.1
  * @date 2026-03-23
  * 
- * @copyright Copyright (c) 2026
- * 
  */
+#include <SFML/Graphics.hpp>
+#include <iostream>
 #include "../header/game.h"
 #include "../header/background.h"
 #include "../header/button.h"
-#include <SFML/Graphics.hpp>
-#include <iostream>
 #include "../header/target.h"
 #include "../header/weapon.h"
+#include "../header/play.h"
 
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Play Test");
     window.setFramerateLimit(60);
 
     sf::Texture backgroundTexture;
 
-   if (!backgroundTexture.loadFromFile("assets/Background/Background1.png"))
+   if (!backgroundTexture.loadFromFile("assets/Images/Background1.png"))
     {
         std::cout << "Failed to load background.png\n";
         return 1;
@@ -38,33 +37,33 @@ int main()
 
     sf::Clock clock;
 
+    Play play;
+
     Weapon gun(sf::Vector2f(60.f, 500.f), 500.f);
     Target target(600.f, 300.f, 30.f);
-
-    // Timer for shooting loop, (we can make it a classlater on)
-    sf::Clock roundClock;
-    float roundTime = 30.f; // 30 sec
-
+    
     bool bulletExists = false;
     Bullet bullet(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f), 0.f);
-
-    // Use current time as seed for random generator
-    srand(time(0));
-
+    
     while (window.isOpen())
     {
         float dt = clock.restart().asSeconds();
-        
         sf::Event event;
+
+        // Window open
         while (window.pollEvent(event))
         {
+            // Window close
             if (event.type == sf::Event::Closed)
             {
                 window.close();
             }
             
+            // Mouse click
             if (event.type == sf::Event::MouseButtonPressed)
             {
+                play.update(dt, window);
+                play.handleInput(event, window);
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
                     sf::Vector2i mousePixel = sf::Mouse::getPosition(window);
@@ -72,7 +71,8 @@ int main()
                     
                     bullet = gun.fireAt(mouseWorld);
                     bulletExists = true;
-                    
+
+
                     std::cout << "Bullet fired" << std::endl;
                 }
             }
@@ -110,8 +110,10 @@ int main()
         // Rendering
         window.clear();
 
+        // SFML displays things by precedence: the last thing drawn/rendered will be on top. 
+        window.draw(backgroundSprite);
+        play.render(window);
         gun.render(window);
-        background.draw(window);
 
         if (bulletExists)
         {
@@ -122,6 +124,5 @@ int main()
 
         window.display();
     }
-    
     return 0;
 }
