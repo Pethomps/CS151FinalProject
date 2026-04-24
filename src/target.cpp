@@ -243,9 +243,9 @@ void Target::newPosition()
     mTarget.setPosition(x, y);
 
     // Increase speed every time target gets hit
-    if(mSpeed < 250.f)
+    if(mSpeed < 260.f)
     {
-        mSpeed += 10.f;
+        mSpeed += 20.f;
     }
 
     // New random direction
