@@ -22,19 +22,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
     window.setFramerateLimit(60);
 
-    sf::Texture backgroundTexture;
-
-   if (!backgroundTexture.loadFromFile("assets/Images/Background1.png"))
-    {
-        std::cout << "Failed to load background.png\n";
-        return 1;
-    }
-
-    sf::Sprite backgroundSprite(backgroundTexture);
-
-    backgroundSprite.setScale(
-        static_cast<float>(window.getSize().x) / backgroundTexture.getSize().x,
-        static_cast<float>(window.getSize().y) / backgroundTexture.getSize().y);
+    Background gameBackground;
+    gameBackground.loadFile("assets/Images/Background2.png", window);
 
     sf::Clock clock;
 
@@ -110,7 +99,7 @@ int main()
         // Rendering
         window.clear();
 
-        window.draw(backgroundSprite);
+        gameBackground.draw(window);
         gun.render(window);
 
         if (bulletExists)
