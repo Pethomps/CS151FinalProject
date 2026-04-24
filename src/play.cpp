@@ -11,42 +11,34 @@
 /**
  * @brief Default constructor for Play object
  *          - sets frame and target boundary (based on frame)
- *          - sets buttons: restart, rules, results, quit
+ *          - sets buttons: restart, results, quit
  */
 Play::Play()
 {
     // sf::RectangleShape mFrame;
-    mFrame.setSize(sf::Vector2f(580,400));
-    mFrame.setPosition(sf::Vector2f(30,20));
+    mFrame.setSize(sf::Vector2f(760,540));
+    mFrame.setPosition(sf::Vector2f(20,20));
     mFrame.setOutlineColor(sf::Color::White);
     mFrame.setOutlineThickness(5);
-
-    // Target mTarget;
-    // mTarget.setBoundary(30, 20, 580, 400);
+    mFrame.setFillColor(sf::Color::Transparent);
     
     // Button mRestart;  
     mRestart.setPosition(sf::Vector2f(420,450));
     mRestart.setSize(sf::Vector2f(60,20));
     mRestart.setText("Restart");
     mRestart.setColorTextNormal(sf::Color::Red);
-    // mRestart.setColor();
 
-    // Button mRules;
-    mRules.setPosition(sf::Vector2f(220,450));
-    mRules.setSize(sf::Vector2f(60,20));
-    mRules.setText("Rules");
-    mRules.setColorTextNormal(sf::Color::Red);
     // Button mResults;
     mResults.setPosition(sf::Vector2f(580,450));
     mResults.setSize(sf::Vector2f(60,20));
     mResults.setText("Scores");
     mResults.setColorTextNormal(sf::Color::Red);
+
     // Button mQuit;
-    mQuit.setPosition(sf::Vector2f(60,450));
+    mQuit.setPosition(sf::Vector2f(40,570));
     mQuit.setSize(sf::Vector2f(60,20));
     mQuit.setText("Give up");
     mQuit.setColorTextNormal(sf::Color::Red);
-    // mQuit.setColor();
 }
 
 /**
@@ -58,6 +50,7 @@ Play::Play()
  */
 State Play::handleInput(sf::Event &e, sf::RenderWindow &window)
 {
+    std::cout<<"---Play handleInput()--- e.type:"<<e.type<<std::endl;
     // quit, welcome, game, results
     if (mQuit.handleInput(e, window)) {
         return quit;
@@ -83,10 +76,9 @@ State Play::handleInput(sf::Event &e, sf::RenderWindow &window)
  */
 void Play::update(double elapsedTime, sf::RenderWindow &window)
 {
-    // Target mTarget;Button mRestart;Button mRules;Button mResults;Button mQuit;
+    // Target mTarget;Button mRestart;Button mResults;Button mQuit;
     // mTarget.update(elapsedTime, window);
     mRestart.update();
-    mRules.update();
     mResults.update();
     mQuit.update();
 }
@@ -98,10 +90,10 @@ void Play::update(double elapsedTime, sf::RenderWindow &window)
  */
 void Play::render(sf::RenderWindow &window)
 {
+    // std::cout<<"---Play render()---"<<std::endl;
     mTarget.render(window);
     window.draw(mFrame);
     window.draw(mRestart);
-    window.draw(mRules);
     window.draw(mResults);
     window.draw(mQuit);
 }

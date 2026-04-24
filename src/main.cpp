@@ -110,8 +110,8 @@ int main()
         // Rendering
         window.clear();
 
+        window.draw(backgroundSprite);
         gun.render(window);
-        background.draw(window);
 
         if (bulletExists)
         {
