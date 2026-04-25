@@ -16,27 +16,27 @@
 Play::Play()
 {
     // sf::RectangleShape mFrame;
-    mFrame.setSize(sf::Vector2f(760,540));
-    mFrame.setPosition(sf::Vector2f(20,20));
-    mFrame.setOutlineColor(sf::Color::White);
+    mFrame.setSize(sf::Vector2f(800,600));
+    mFrame.setPosition(sf::Vector2f(0,0));
+    mFrame.setOutlineColor(sf::Color::Black);
     mFrame.setOutlineThickness(5);
     mFrame.setFillColor(sf::Color::Transparent);
     
     // Button mRestart;  
-    mRestart.setPosition(sf::Vector2f(420,450));
-    mRestart.setSize(sf::Vector2f(60,20));
+    mRestart.setPosition(sf::Vector2f(400,575));
+    mRestart.setSize(sf::Vector2f(120,40));
     mRestart.setText("Restart");
     mRestart.setColorTextNormal(sf::Color::Red);
 
     // Button mResults;
-    mResults.setPosition(sf::Vector2f(580,450));
-    mResults.setSize(sf::Vector2f(60,20));
+    mResults.setPosition(sf::Vector2f(730,575));
+    mResults.setSize(sf::Vector2f(120,40));
     mResults.setText("Scores");
     mResults.setColorTextNormal(sf::Color::Red);
 
     // Button mQuit;
-    mQuit.setPosition(sf::Vector2f(40,570));
-    mQuit.setSize(sf::Vector2f(60,20));
+    mQuit.setPosition(sf::Vector2f(75,575));
+    mQuit.setSize(sf::Vector2f(120,40));
     mQuit.setText("Give up");
     mQuit.setColorTextNormal(sf::Color::Red);
 }
