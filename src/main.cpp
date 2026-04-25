@@ -5,16 +5,15 @@
  * @version 0.1
  * @date 2026-03-23
  * 
- * @copyright Copyright (c) 2026
- * 
- */
+*/
+#include <SFML/Graphics.hpp>
+#include <iostream>
 #include "../header/game.h"
 #include "../header/background.h"
 #include "../header/button.h"
-#include <SFML/Graphics.hpp>
-#include <iostream>
 #include "../header/target.h"
 #include "../header/weapon.h"
+#include "../header/play.h"
 
 
 int main()
@@ -29,6 +28,8 @@ int main()
 
     Weapon gun(sf::Vector2f(60.f, 500.f), 500.f);
     Target target(600.f, 300.f, 30.f);
+
+    Play play;
 
     // Timer for shooting loop, (we can make it a classlater on)
     sf::Clock roundClock;
@@ -65,6 +66,37 @@ int main()
                     std::cout << "Bullet fired" << std::endl;
                 }
             }
+
+            /* Passes event to each button which checks if it was clicked.
+                This can be done within a class; maybe Game or Play.
+                Play makes sense to me, but the Cherry game does it in Game.
+            */
+            State state = play.handleInput(event, window);
+            if (state != cont) {
+                switch (state)
+                {
+                    case welcome:   // Quit ("Give Up") button pressed
+                        //std::cout<<"Game::handleInput case welcome" <<std::endl;
+                        // state = Welcome.handleInput(event, window);
+                        break;
+                    case game:      // Restart button pressed
+                        //std::cout<<"Game::handleInput case game" <<std::endl;
+                        // state = game.handleInput(event, window);
+                        break;
+                    case results:   // Results ("Scores") button pressed
+                        //std::cout<<"Game::handleInput case result" <<std::endl;
+                        // state=gameover.handleInput(event, window);
+                        break;
+                    // case quit:   // I don't think we need a "close the whole window" button, during the game
+                    //     //std::cout<<"Game::handleInput case quit" <<std::endl;
+                    //     window.close();
+                    //     break;       
+                    default:        // catches everything else; continues game
+                        state=cont;
+                        break;
+                }
+            }
+            
         }
 
         // Game Loop
@@ -108,6 +140,7 @@ int main()
         }
 
         target.render(window);
+        play.render(window);
 
         window.display();
     }
