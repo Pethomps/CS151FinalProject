@@ -12,9 +12,9 @@
 
 bool Music::load(const std::string& fileName)
 {
-    if(!mMusic.loadFromFile(fileName))
+    if(!mMusic.openFromFile(fileName))
     {
-        std::cout << "Failed to load sound: " << fileName << std::endl;
+        std::cout << "Failed to load music: " << fileName << std::endl;
         return false;
     }
 
@@ -25,6 +25,7 @@ bool Music::load(const std::string& fileName)
 void Music::play(bool loop)
 {
     mMusic.setLoop(loop);
+    mMusic.setVolume(30.f);
     mMusic.play();
 }
 

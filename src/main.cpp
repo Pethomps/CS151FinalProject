@@ -14,6 +14,8 @@
 #include "../header/target.h"
 #include "../header/weapon.h"
 #include "../header/play.h"
+#include "../header/Music.h"
+#include "../header/Sound.h"
 
 
 int main()
@@ -42,7 +44,7 @@ int main()
 
     Play play;
 
-    // Timer for shooting loop, (we can make it a classlater on)
+    // Timer for shooting loop, (we can make it a class later on)
     sf::Clock roundClock;
     float roundTime = 30.f; // 30 sec
 
@@ -51,6 +53,15 @@ int main()
 
     // Use current time as seed for random generator
     srand(time(0));
+
+    // Sound and music objects
+    Sound gunshotSound;
+    Music backgroundMusic;
+
+    gunshotSound.loadSound("assets/Audio/gunshot.wav");
+    backgroundMusic.load("assets/Audio/western-texas-background.ogg");
+    backgroundMusic.play();
+
 
     while (window.isOpen())
     {
@@ -74,6 +85,8 @@ int main()
                     bullet = gun.fireAt(mouseWorld);
                     bulletExists = true;
                     
+                    gunshotSound.play();
+
                     std::cout << "Bullet fired" << std::endl;
                 }
             }
