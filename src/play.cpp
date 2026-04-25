@@ -26,20 +26,22 @@ Play::Play()
     mRestart.setPosition(sf::Vector2f(400,575));
     mRestart.setSize(sf::Vector2f(120,40));
     mRestart.setText("Restart");
-    mRestart.setColorTextNormal(sf::Color::Red);
+    mRestart.setColorTextNormal(sf::Color::Black);
+    mRestart.setColorTextHover(sf::Color::Red);
 
     // Button mResults;
     mResults.setPosition(sf::Vector2f(730,575));
     mResults.setSize(sf::Vector2f(120,40));
     mResults.setText("Scores");
-    mResults.setColorTextNormal(sf::Color::Red);
+    mResults.setColorTextNormal(sf::Color::Black);
+    mResults.setColorTextHover(sf::Color::Red);
 
     // Button mQuit;
     mQuit.setPosition(sf::Vector2f(75,575));
     mQuit.setSize(sf::Vector2f(120,40));
     mQuit.setText("Give up");
-    mQuit.setColorTextNormal(sf::Color::Red);
-}
+    mQuit.setColorTextNormal(sf::Color::Black);
+    mQuit.setColorTextHover(sf::Color::Red);}
 
 /**
  * @brief Checks if a button was pressed, otherwise continues the game
@@ -50,22 +52,34 @@ Play::Play()
  */
 State Play::handleInput(sf::Event &e, sf::RenderWindow &window)
 {
-    std::cout<<"---Play handleInput()--- e.type:"<<e.type<<std::endl;
     // quit, welcome, game, results
+
+    // During the game, I find it unnecessary to have a button to close the whole window 
+    // if (mQuit.handleInput(e, window)) {
+    //     std::cout<<"---Play handleInput()--- QUIT"<<std::endl;
+    //     return quit;
+    // }
+
+    // Return to welcome screen
     if (mQuit.handleInput(e, window)) {
-        return quit;
-    }
-    if (mQuit.handleInput(e, window)) {
+        std::cout<<"---Play handleInput()--- WELCOME"<<std::endl;
         return welcome;
     }
+
+    // Reset entire game (score, target, weapon, bullet)
     if (mRestart.handleInput(e, window)) {
+        std::cout<<"---Play handleInput()--- RESTART"<<std::endl;
         return game;
     }
+
+    // Results screen
     if (mResults.handleInput(e, window)) {
+        std::cout<<"---Play handleInput()--- RESULTS"<<std::endl;
         return results;
     }
+
     // no Button pressed
-    return game;
+    return cont;
 }
 
 /**
