@@ -21,7 +21,6 @@ bool Sound::loadSound(const std::string& fileName)
     }
 
     mSound.setBuffer(mBuffer);
-
     // Set volume
     mSound.setVolume(50.f);
     return true;
@@ -29,8 +28,6 @@ bool Sound::loadSound(const std::string& fileName)
 
 void Sound::play()
 {
-    if(mSound.getStatus() != sf::Sound::Playing)
-    {
-        mSound.play();
-    }
+    mSound.stop();
+    mSound.play();
 }

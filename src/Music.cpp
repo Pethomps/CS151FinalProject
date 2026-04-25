@@ -25,7 +25,7 @@ bool Music::load(const std::string& fileName)
 void Music::play(bool loop)
 {
     mMusic.setLoop(loop);
-    mMusic.setVolume(30.f);
+    mMusic.setVolume(25.f);
     mMusic.play();
 }
 
