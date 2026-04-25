@@ -166,10 +166,12 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
         if(mouseInButton)
         {
             mBtnState = state::hovered;
+            update();
         }
         else
         {
             mBtnState = state::normal;
+            update();
         }
     }
     if (e.type == sf::Event::MouseButtonPressed)
@@ -179,11 +181,13 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
             if(mouseInButton)
             {
                 mBtnState = state::clicked;
+                update();
                 return true;
             }
             else
             {
                 mBtnState = state::normal;
+                update();
             }
         }
     }
@@ -194,10 +198,12 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
             if(mouseInButton)
             {
                 mBtnState = state::hovered;
+                update();
             }
             else
             {
                 mBtnState = state::normal;
+                update();
             }
         }
     }
