@@ -89,6 +89,7 @@ void Button::setPosition(sf::Vector2f position)
     // adjust origin to the middle
     mPosition = position;
     mButton.setOrigin(imageSize.x/2, imageSize.y/2);
+    mButton.setPosition(position);
 
     // get font size based on button size
     unsigned int fontSize = mButton.getGlobalBounds().height/2;
