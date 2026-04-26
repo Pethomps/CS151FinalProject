@@ -22,7 +22,7 @@ Target::Target(float x, float y, float radius)
     : mAlive(true), mExploding(false)
 {
     // Load texture to a sprite
-    if(!mTexture.loadFromFile("Images/duckTarget.png"))
+    if(!mTexture.loadFromFile("assets/target/duckTarget.png"))
     {
         std::cout << "Failed to load duck texture\n";
     }
@@ -49,7 +49,7 @@ Target::Target(float x, float y, float radius)
     mVelocity.y /= length;
 
     //Hit message setup
-    if(!mFont.loadFromFile("Images/KGPerfectPenmanship.otf"))
+    if(!mFont.loadFromFile("assets/Fonts/KGPerfectPenmanship.otf"))
     {
         std::cout << "Failed to load font\n";
     }
