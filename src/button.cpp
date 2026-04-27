@@ -37,7 +37,7 @@ Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Colo
 {
     if (!mTexture.loadFromFile("./assets/Button/button.png"))
     {
-        std::cout<<"Error opening texture file\n";
+        std::cout<<"Button: error opening button.png\n";
         exit(1);
     }
     // create sprite that looks like a button
@@ -58,7 +58,7 @@ Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Colo
     // Load font
     if (!mFont.loadFromFile("./assets/Fonts/VintageCharm-Regular.otf"))
     {
-        std::cout<<"Error opening font file\n";
+        std::cout<<"Button: error opening .otf file\n";
         exit(2);
     }
     mText.setFont(mFont);
