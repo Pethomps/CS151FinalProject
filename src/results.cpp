@@ -1,7 +1,7 @@
 #include "../header/results.h"
 Results::Results()
 {
-    if (!mFont.loadFromFile("./assets/VintageCharm-Regular.otf"))
+    if (!mFont.loadFromFile("./assets/Fonts/VintageCharm-Regular.otf"))
     {
         std::cout<<"Error opening file\n";
         exit(2);
