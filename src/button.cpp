@@ -35,11 +35,7 @@ Button::Button():Button("Play!", {300,100}, {1,1}, sf::Color::White)
  */
 Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Color color)
 {
-<<<<<<< HEAD
-    if (!mTexture.loadFromFile("assets/Button/button.png"))
-=======
     if (!mTexture.loadFromFile("./assets/Button/button.png"))
->>>>>>> da806e121133202bb256355773db8be099c57d6c
     {
         std::cout<<"Button: error opening button.png\n";
         exit(1);
@@ -60,11 +56,7 @@ Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Colo
     // set size as a ratio of original size
     mButton.setScale(size.x/imageSize.x, size.y/imageSize.y);
     // Load font
-<<<<<<< HEAD
-    if (!mFont.loadFromFile("assets/Fonts/VintageCharm-Regular.otf"))
-=======
     if (!mFont.loadFromFile("./assets/Fonts/VintageCharm-Regular.otf"))
->>>>>>> da806e121133202bb256355773db8be099c57d6c
     {
         std::cout<<"Button: error opening .otf file\n";
         exit(2);

@@ -22,6 +22,11 @@ void Game::handleInput(sf::RenderWindow &window)
             mGameState = mWelcomeScreen.handleInput(event, window);
             break;
         }
+        case cont:
+        {
+
+        }
+
         case game:
         {
             mGameState = mGame.handleInput(event, window);
@@ -53,6 +58,11 @@ void Game::update(double elapsedTime, sf::RenderWindow &window)
     case quit:
         window.close();
         break;
+    case cont:
+    {
+        
+    }
+
     }
 }
 void Game::render(sf::RenderWindow &window)
@@ -71,6 +81,11 @@ void Game::render(sf::RenderWindow &window)
             break;
         case quit:
             break;
+        case cont:
+        {
+
+        }
+
     }
     window.display();
 }

@@ -17,6 +17,7 @@ class Play
         Button mRestart;
         Button mResults;
         Button mQuit;
+        Target mTarget;
         sf::RectangleShape mFrame;
 };
 
