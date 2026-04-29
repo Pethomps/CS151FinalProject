@@ -13,10 +13,10 @@ public:
 
 
 private:
-    sf::Text mRules;
     sf::Text mHeader;
     sf::Font mFont;
     Button mStart;  
+    Button mRules;
 };
 
 #endif

@@ -12,13 +12,13 @@ Welcome::Welcome()
     mHeader.setCharacterSize(20);
     mHeader.setString("Game test");
 
-    mRules.setFont(mFont);
-    mRules.setCharacterSize(16);
-    mRules.setString("rule\nrule\nrule\n");
-    mRules.setPosition({10,30});
+    mRules.setText("Rules");
+    mRules.setPosition({400,300});
+    mRules.setSize({80,80});
+    mRules.setColorTextNormal(sf::Color::Blue);
 
     mStart.setText("start");
-    mStart.setPosition({300, 300});
+    mStart.setPosition({250, 300});
     mStart.setSize({80, 80});
     mStart.setColorTextNormal(sf::Color::Blue);
     //mStart.setColor(sf::Color(255,255,255));
@@ -29,11 +29,17 @@ State Welcome::handleInput(sf::Event &e, sf::RenderWindow &window)
     {
         return game; // return state to go to game if user selects button
     }
-    return welcome; // else stay on welcome screen
+    else if(mRules.handleInput(e,window))
+    {
+        return rules;
+    }
+    else
+        return welcome; // else stay on welcome screen
 }
 void Welcome::update()
 {
     mStart.update(); // update button
+    mRules.update();
 }
 void Welcome::render(sf::RenderWindow &window)
 {
