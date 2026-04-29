@@ -23,16 +23,15 @@ Welcome::Welcome()
     mRules.setPosition({400,550});
     mRules.setSize({300,60});
     mRules.setColorTextNormal(sf::Color(249,235,205));
-    mRules.setColorTextHover(sf::Color(249,235,205));
+    mRules.setColorTextHover(sf::Color(254, 208, 109));
     mRules.setColor(sf::Color(254,208,109));
 
     mStart.setText("START!");
     mStart.setPosition({400, 450});
     mStart.setSize({350, 75});
     mStart.setColorTextNormal(sf::Color(249,235,205));
-    mStart.setColorTextHover(sf::Color(249,235,205));
+    mStart.setColorTextHover(sf::Color(254, 208, 109));
     mStart.setColor(sf::Color(254,208,109));
-    //mStart.setColor(sf::Color(255,255,255));
 }
 State Welcome::handleInput(sf::Event &e, sf::RenderWindow &window)
 {

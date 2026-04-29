@@ -136,7 +136,7 @@ void Button::setColor(sf::Color btnColor)
 void Button::setColorTextNormal(sf::Color textNormalColor)
 {
     mTextNormal = textNormalColor;
-    mText.setColor(mTextNormal);
+    mText.setFillColor(mTextNormal);
 }
 
 /**
@@ -147,7 +147,7 @@ void Button::setColorTextNormal(sf::Color textNormalColor)
 void Button::setColorTextHover(sf::Color textHoverColor)
 {
     mTextHover = textHoverColor;
-    mText.setColor(mTextNormal);
+    mText.setFillColor(mTextNormal);
 }
 
 //change button label to s (what else needs to be changed?)
