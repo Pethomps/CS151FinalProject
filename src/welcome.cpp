@@ -1,4 +1,5 @@
 #include "../header/welcome.h"
+#include <iostream>
 
 Welcome::Welcome()
 {
@@ -8,18 +9,24 @@ Welcome::Welcome()
         exit(1);
     }
 
+    sf::FloatRect bounds = mHeader.getLocalBounds();
+    mHeader.setOrigin((bounds.width/2),{bounds.height/2});
+    mHeader.setFillColor(sf::Color(249,235,205));
+    mHeader.setOutlineThickness(20);
+    mHeader.setOutlineColor(sf::Color(254,208,109));
     mHeader.setFont(mFont);
-    mHeader.setCharacterSize(20);
-    mHeader.setString("Game test");
+    mHeader.setCharacterSize(125);
+    mHeader.setString("DUCK\nHUNT");
+    mHeader.setPosition({255,125});
 
     mRules.setText("Rules");
-    mRules.setPosition({400,300});
-    mRules.setSize({80,80});
+    mRules.setPosition({400,550});
+    mRules.setSize({300,60});
     mRules.setColorTextNormal(sf::Color::Blue);
 
     mStart.setText("start");
-    mStart.setPosition({250, 300});
-    mStart.setSize({80, 80});
+    mStart.setPosition({400, 450});
+    mStart.setSize({350, 75});
     mStart.setColorTextNormal(sf::Color::Blue);
     //mStart.setColor(sf::Color(255,255,255));
 }
@@ -43,6 +50,10 @@ void Welcome::update()
 }
 void Welcome::render(sf::RenderWindow &window)
 {
+    mBackground.loadFile("assets/Images/welcomeScreen.png",window);
+    mBackground.resizePic({800, 600});
+    mBackground.draw(window);
+
     window.draw(mHeader);
     window.draw(mRules);
     window.draw(mStart);

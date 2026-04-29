@@ -134,7 +134,7 @@ TEST_CASE("Background functions work correctly") {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
 
     SECTION("background object loads file successfully") {
-        b.loadFile("Background1.png", window);
+        b.loadFile("../assets/Background1.png", window);
         REQUIRE(true);
     }
     // We can test for failure-to-load-file if it throws an exception instead of exit(1)
@@ -170,4 +170,70 @@ TEST_CASE("Test GameOver draw function")
         go.draw(window);
         REQUIRE(true);
     }
+}
+
+// ----------------------------------------------
+// Target
+// ----------------------------------------------
+TEST_CASE("Test target initialize alive")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    REQUIRE(t.isAlive() == true);
+}
+
+TEST_CASE("Target moves when updated")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    sf::Vector2f before = t.getPosition();
+
+    t.update(1.f); // 1 second
+
+    sf::Vector2f after = t.getPosition();
+
+    REQUIRE(after != before);
+}
+
+TEST_CASE("Target detects hit")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    SECTION("Detects hit correclly")
+    {
+        sf::FloatRect bullet(100.f, 100.f, 5.f, 5.f);
+        REQUIRE(t.isHit(bullet) == true);
+    }
+
+    SECTION("Does not detect hit")
+    {
+        sf::FloatRect bullet(400.f, 400.f, 5.f, 5.f);
+        REQUIRE(t.isHit(bullet) == false);
+    }
+}
+
+TEST_CASE("Test change position")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    sf::Vector2f before = t.getPosition();
+
+    t.newPosition();
+
+    sf::Vector2f after = t.getPosition();
+
+    REQUIRE(after != before);
+}
+
+TEST_CASE("Test speed increase")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    float before = t.getSpeed();
+
+    t.newPosition();
+
+    float after = t.getSpeed();
+
+    REQUIRE(after > before);
 }

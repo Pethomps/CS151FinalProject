@@ -1,4 +1,4 @@
 #ifndef STATES_H
 #define STATES_H
-enum State {quit, welcome, game, results, rules};
+enum State {quit, welcome, game, results, cont,rules};
 #endif

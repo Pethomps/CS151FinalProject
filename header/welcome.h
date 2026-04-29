@@ -2,6 +2,7 @@
 #define WELCOME_H
 #include "states.h"
 #include "button.h"
+#include "background.h"
 
 class Welcome
 {
@@ -17,6 +18,7 @@ private:
     sf::Font mFont;
     Button mStart;  
     Button mRules;
+    Background mBackground;
 };
 
 #endif
