@@ -111,6 +111,6 @@ void Play::render(sf::RenderWindow &window)
     window.draw(mResults);
     window.draw(mQuit);
     mTarget.render(window);
-    mPlay.render(window);
+   // mPlay.render(window);
     
 }

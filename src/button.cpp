@@ -128,6 +128,28 @@ void Button::setColor(sf::Color btnColor)
     mButton.setColor(mButtonColor);
 }
 
+/**
+ * @brief change text color
+ * 
+ * @param btnColor new color
+ */
+void Button::setColorTextNormal(sf::Color textNormalColor)
+{
+    mTextNormal = textNormalColor;
+    mText.setFillColor(mTextNormal);
+}
+
+/**
+ * @brief change text color
+ * 
+ * @param btnColor new color
+ */
+void Button::setColorTextHover(sf::Color textHoverColor)
+{
+    mTextHover = textHoverColor;
+    mText.setFillColor(mTextNormal);
+}
+
 //change button label to s (what else needs to be changed?)
 /**
  * @brief Change button's text and adjust text's origin and position.

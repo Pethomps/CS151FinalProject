@@ -1,4 +1,5 @@
 #include "../header/game.h"
+#include "../header/states.h"
 
 Game::Game()
 {
