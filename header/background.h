@@ -19,7 +19,7 @@ public:
     Background();
     ~Background(){};
 
-    void loadFile(const std::string& pngName, sf::RenderWindow& window);
+    void loadFile(const std::string& pngName);
     void resizePic(sf::Vector2u windowSize);
     void draw(sf::RenderWindow& window);
 
