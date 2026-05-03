@@ -110,7 +110,7 @@ void Play::render(sf::RenderWindow &window)
     window.draw(mRestart);
     window.draw(mResults);
     window.draw(mQuit);
-    mTarget.render(window);
+    // mTarget.render(window);
    // mPlay.render(window);
     
 }
