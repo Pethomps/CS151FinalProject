@@ -23,8 +23,8 @@ class Button: public sf::Drawable
         void setSize(sf::Vector2f  size);
         void setColor(sf::Color btnColor);
         void setText(std::string s);
-        void setColorTextNormal(sf::Color textNormalColor){mTextNormal = textNormalColor;};
-        void setColorTextHover(sf::Color textHoverColor){mTextHover = textHoverColor;};
+        void setColorTextNormal(sf::Color textNormalColor);
+        void setColorTextHover(sf::Color textHoverColor);
 
         sf::Vector2f getPosition(){return mPosition;};
         sf::Vector2f getDimensions(){return sf::Vector2f(mButton.getGlobalBounds().width, mButton.getGlobalBounds().height);};

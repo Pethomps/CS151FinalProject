@@ -2,8 +2,9 @@ CFLAGS = g++ -Wall -std=c++17 -pedantic-errors
 #obj/game.o obj/button.o obj/target.o obj/weapon.o obj/welcome.o obj/play.o obj/results.o obj/states.o obj/background.o
 game: obj/main.o obj/background.o obj/button.o obj/GameOver.o \
       obj/game.o obj/weapon.o obj/target.o obj/welcome.o \
-      obj/play.o obj/results.o obj/states.o
-	$(CFLAGS) $^ -o game -lsfml-graphics -lsfml-window -lsfml-system
+      obj/play.o obj/results.o obj/states.o obj/Music.o \
+	  obj/Sound.o 
+	$(CFLAGS) $^ -o game -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 obj/main.o: src/main.cpp header/game.h | obj
 	$(CFLAGS) -c src/main.cpp -o obj/main.o
@@ -37,6 +38,13 @@ obj/background.o: src/background.cpp header/background.h | obj
 
 obj/GameOver.o: src/GameOver.cpp header/GameOver.h | obj
 	$(CFLAGS) -c src/GameOver.cpp -o obj/GameOver.o
+
+obj/Sound.o: src/Sound.cpp header/Sound.h | obj
+	$(CFLAGS) -c src/Sound.cpp -o obj/Sound.o
+
+obj/Music.o: src/Music.cpp header/Music.h | obj
+	$(CFLAGS) -c src/Music.cpp -o obj/Music.o
+
 
 TESTS/test: TESTS/test.o TESTS/catch_amalgamated.o obj/button.o obj/background.o obj/GameOver.o obj/target.o
 	$(CFLAGS) $^ -o $@ -lsfml-graphics -lsfml-window -lsfml-system

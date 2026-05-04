@@ -37,7 +37,7 @@ Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Colo
 {
     if (!mTexture.loadFromFile("./assets/Button/button.png"))
     {
-        std::cout<<"Error opening texture file\n";
+        std::cout<<"Button: error opening button.png\n";
         exit(1);
     }
     // create sprite that looks like a button
@@ -58,7 +58,7 @@ Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Colo
     // Load font
     if (!mFont.loadFromFile("./assets/Fonts/VintageCharm-Regular.otf"))
     {
-        std::cout<<"Error opening font file\n";
+        std::cout<<"Button: error opening .otf file\n";
         exit(2);
     }
     mText.setFont(mFont);
@@ -128,6 +128,28 @@ void Button::setColor(sf::Color btnColor)
     mButton.setColor(mButtonColor);
 }
 
+/**
+ * @brief change text color
+ * 
+ * @param btnColor new color
+ */
+void Button::setColorTextNormal(sf::Color textNormalColor)
+{
+    mTextNormal = textNormalColor;
+    mText.setFillColor(mTextNormal);
+}
+
+/**
+ * @brief change text color
+ * 
+ * @param btnColor new color
+ */
+void Button::setColorTextHover(sf::Color textHoverColor)
+{
+    mTextHover = textHoverColor;
+    mText.setFillColor(mTextNormal);
+}
+
 //change button label to s (what else needs to be changed?)
 /**
  * @brief Change button's text and adjust text's origin and position.
@@ -166,12 +188,12 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
         if(mouseInButton)
         {
             mBtnState = state::hovered;
-            update();
+            // update();
         }
         else
         {
             mBtnState = state::normal;
-            update();
+            // update();
         }
     }
     if (e.type == sf::Event::MouseButtonPressed)
@@ -181,13 +203,13 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
             if(mouseInButton)
             {
                 mBtnState = state::clicked;
-                update();
+                // update();
                 return true;
             }
             else
             {
                 mBtnState = state::normal;
-                update();
+                // update();
             }
         }
     }
@@ -198,12 +220,12 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
             if(mouseInButton)
             {
                 mBtnState = state::hovered;
-                update();
+                // update();
             }
             else
             {
                 mBtnState = state::normal;
-                update();
+                // update();
             }
         }
     }

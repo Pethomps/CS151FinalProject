@@ -41,7 +41,7 @@ private:
 
 
 public:
-    Target();
+    Target() {};
     Target(float x, float y, float radius);
 
     float getSpeed() { return mSpeed; } // Getter function for speed
