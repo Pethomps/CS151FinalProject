@@ -17,7 +17,7 @@ GameOver::GameOver()
 GameOver::GameOver(sf::RenderWindow& window)
 {
     // game over background
-    mBackground.loadFile("../assets/Images/GameOver.png", window);
+    mBackground.loadFile("../assets/Images/GameOver.png");
     
     // Title
     mFont.loadFromFile("../assets/Fonts/Gameplay.ttf");
