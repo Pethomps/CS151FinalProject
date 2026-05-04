@@ -22,10 +22,10 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
     window.setFramerateLimit(60);
     sf::Clock clock;
+    Game game;
     
     while (window.isOpen())
     {
-        Game game;
         game.render(window);
         float dt = clock.restart().asSeconds();
         game.handleInput(window);
