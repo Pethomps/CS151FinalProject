@@ -20,7 +20,7 @@ void Game::handleInput(sf::RenderWindow &window)
     sf::Event event;
     while (window.pollEvent(event))
     {
-        std::cout<<"Game - handleInput"<<std::endl;
+        // std::cout<<"Game - handleInput"<<std::endl;
         if (event.type == sf::Event::Closed)
         {
             window.close();
@@ -28,27 +28,31 @@ void Game::handleInput(sf::RenderWindow &window)
 
         switch (mGameState)
         {
-            std::cout<<"Game - switch mGameState: "<<mGameState<<std::endl;
             case welcome:
             {
+                // std::cout<<"Game - switch mGameState: WELCOME"<<std::endl;
                 mGameState = mWelcomeScreen.handleInput(event, window);
                 break;
             }
             case cont:
             {
-
+                std::cout<<"Game - switch mGameState: CONT"<<std::endl;
+                break;
             }
 
             case game:
             {
+                std::cout<<"Game - switch mGameState: GAME"<<std::endl;
                 mGameState = mGame.handleInput(event, window);
                 break;
             }
             case results:
+                std::cout<<"Game - switch mGameState: RESULTS"<<std::endl;
                 mGameState = mResults.handleInput(event,window);
                 break;
             case quit:
             {
+                std::cout<<"Game - switch mGameState: QUIT"<<std::endl;
                 window.close();
                 break;
             }
@@ -71,9 +75,7 @@ void Game::update(double elapsedTime, sf::RenderWindow &window)
         window.close();
         break;
     case cont:
-    {
-        
-    }
+        break;
 
     }
 }
@@ -94,10 +96,7 @@ void Game::render(sf::RenderWindow &window)
         case quit:
             break;
         case cont:
-        {
-
-        }
-
+            break;
     }
     window.display();
 }
