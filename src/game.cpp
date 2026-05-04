@@ -36,23 +36,19 @@ void Game::handleInput(sf::RenderWindow &window)
             }
             case cont:
             {
-                std::cout<<"Game - switch mGameState: CONT"<<std::endl;
                 break;
             }
 
             case game:
             {
-                std::cout<<"Game - switch mGameState: GAME"<<std::endl;
                 mGameState = mGame.handleInput(event, window);
                 break;
             }
             case results:
-                std::cout<<"Game - switch mGameState: RESULTS"<<std::endl;
                 mGameState = mResults.handleInput(event,window);
                 break;
             case quit:
             {
-                std::cout<<"Game - switch mGameState: QUIT"<<std::endl;
                 window.close();
                 break;
             }
