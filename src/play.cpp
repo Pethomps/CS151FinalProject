@@ -15,16 +15,10 @@
  */
 Play::Play()
 {
-    mGun;
-    mBullet;
     mBulletExists = false;
-    mTarget;
-    mGunshotSound;
     mGunshotSound.loadSound("./assets/Audio/gunshot.wav");
     mPlayBackground.loadFile(mBackgroundPNG);
-    // Timer for shooting loop, (we can make it a class later on)
-    mPlayClock;
-    mPlayTime;
+
     /*
     *   Frame & Buttons
     */
@@ -69,20 +63,17 @@ State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
     // Return to welcome screen
     if (mPlayQuit.handleInput(event, window)) 
     {
-        std::cout<<"---Play handleInput()--- WELCOME"<<std::endl;
         return welcome;
     }
     // Reset entire game (score, target, weapon, bullet)
     if (mPlayRestart.handleInput(event, window)) 
     {
-        std::cout<<"---Play handleInput()--- RESTART"<<std::endl;
         // window.clear();  maybe needed to reset game?
         return game;
     }
     // Results screen
     if (mPlayResults.handleInput(event, window)) 
     {
-        std::cout<<"---Play handleInput()--- RESULTS"<<std::endl;
         return results;
     }
 
@@ -101,34 +92,7 @@ State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
             std::cout << "Bullet fired" << std::endl;
         }
     }
-    // Game Loop
-    if(mPlayClock.getElapsedTime().asSeconds() >= mPlayTime)
-    {
-        std::cout << "GAME OVER \n";
-        window.close(); // replace with game over screen
-    }
-
-    
-        // Bullet update
-        if (mBulletExists)
-        {
-            if (mBullet.isAlive())
-            {
-                mBullet.update(mPlayClock.getElapsedTime().asSeconds());
-
-                if (mTarget.isAlive())
-                {
-                    if (mBulletExists && mTarget.isHit(mBullet.getBounds()))
-                    {
-                        mBullet.destroy();
-                        mBulletExists = false;
-
-                        std::cout << "Target hit!\n";
-                    }
-                }
-            }
-        }
-    return cont;
+    return game;
 }
 
 /**
@@ -139,8 +103,31 @@ State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
  */
 void Play::update(double elapsedTime, sf::RenderWindow &window)
 {
-    
-    window.display();
+    // Game Loop
+    if(mPlayClock.getElapsedTime().asSeconds() >= mPlayTime)
+    {
+        std::cout << "GAME OVER \n";
+        window.close(); // replace with game over screen
+    }
+    // Bullet update
+    if (mBulletExists)
+    {
+        if (mBullet.isAlive())
+        {
+            mBullet.update(elapsedTime);
+
+            if (mTarget.isAlive())
+            {
+                if (mBulletExists && mTarget.isHit(mBullet.getBounds()))
+                {
+                    mBullet.destroy();
+                    mBulletExists = false;
+
+                    std::cout << "Target hit!\n";
+                }
+            }
+        }
+    }
     // Target mTarget;Button mRestart;Button mResults;Button mQuit;
     mTarget.update(elapsedTime); //mTarget.update(elapsedTime, window); 
     mPlayRestart.update();
@@ -155,7 +142,6 @@ void Play::update(double elapsedTime, sf::RenderWindow &window)
  */
 void Play::render(sf::RenderWindow &window)
 {
-    // std::cout<<"---Play render()---"<<std::endl;
     mPlayBackground.draw(window);
     // window.draw(mPlayBackground);
     mGun.render(window);
@@ -168,7 +154,4 @@ void Play::render(sf::RenderWindow &window)
     window.draw(mPlayRestart);
     window.draw(mPlayResults);
     window.draw(mPlayQuit);
-    // mTarget.render(window);
-   // mPlay.render(window);
-    
 }
