@@ -9,7 +9,7 @@ Game::Game()
 
     // Sound and music objects
     mBackgroundMusic;
-    mBackgroundMusic.load("../assets/Audio/western-texas-background.ogg");
+    mBackgroundMusic.load("./assets/Audio/western-texas-background.ogg");
     mBackgroundMusic.play();
     
 }

@@ -20,7 +20,7 @@ Play::Play()
     mBulletExists = false;
     mTarget;
     mGunshotSound;
-    mGunshotSound.loadSound("../assets/Audio/gunshot.wav");
+    mGunshotSound.loadSound("./assets/Audio/gunshot.wav");
     mPlayBackground.loadFile(mBackgroundPNG);
     // Timer for shooting loop, (we can make it a class later on)
     mPlayClock;
@@ -114,7 +114,7 @@ State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
         {
             if (mBullet.isAlive())
             {
-                mBullet.update(dt);
+                mBullet.update(mPlayClock.getElapsedTime().asSeconds());
 
                 if (mTarget.isAlive())
                 {
@@ -128,8 +128,7 @@ State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
                 }
             }
         }
-
-
+    return cont;
 }
 
 /**

@@ -4,6 +4,8 @@
 #include "button.h"
 #include "weapon.h"
 #include "target.h"
+#include "Sound.h"
+#include "background.h"
 
 class Play
 {
@@ -22,7 +24,7 @@ class Play
         Target mTarget{600.f, 300.f, 30.f};
         sf::Clock mPlayClock;
         float mPlayTime = 30.f; // 30 sec
-        std::string mBackgroundPNG = "assets/Images/Background2.png";
+        std::string mBackgroundPNG = "./assets/Images/Background2.png";
         sf::RectangleShape mPlayFrame;
         Background mPlayBackground;
         Button mPlayRestart;
