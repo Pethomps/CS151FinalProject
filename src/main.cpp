@@ -26,12 +26,10 @@ int main()
     
     while (window.isOpen())
     {
-        game.render(window);
         float dt = clock.restart().asSeconds();
         game.handleInput(window);
         game.update(dt, window);
-        game.render(window);
-            
+        game.render(window); 
     }
     
     return 0;
