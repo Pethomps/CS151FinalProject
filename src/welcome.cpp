@@ -53,7 +53,7 @@ void Welcome::update()
 }
 void Welcome::render(sf::RenderWindow &window)
 {
-    mBackground.loadFile("assets/Images/welcomeScreen.png",window);
+    mBackground.loadFile("assets/Images/welcomeScreen.png");
     mBackground.resizePic({800, 600});
     mBackground.draw(window);
 

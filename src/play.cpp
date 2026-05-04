@@ -15,33 +15,38 @@
  */
 Play::Play()
 {
+    mBulletExists = false;
+    mGunshotSound.loadSound("./assets/Audio/gunshot.wav");
+    mPlayBackground.loadFile(mBackgroundPNG);
+
+    /*
+    *   Frame & Buttons
+    */
     // sf::RectangleShape mFrame;
-    mFrame.setSize(sf::Vector2f(800,600));
-    mFrame.setPosition(sf::Vector2f(0,0));
-    mFrame.setOutlineColor(sf::Color::Black);
-    mFrame.setOutlineThickness(5);
-    mFrame.setFillColor(sf::Color::Transparent);
-    
+    mPlayFrame.setSize(sf::Vector2f(800,600));
+    mPlayFrame.setPosition(sf::Vector2f(0,0));
+    mPlayFrame.setOutlineColor(sf::Color::Black);
+    mPlayFrame.setOutlineThickness(5);
+    mPlayFrame.setFillColor(sf::Color::Transparent);
     // Button mRestart;  
-    mRestart.setPosition(sf::Vector2f(400,575));
-    mRestart.setSize(sf::Vector2f(120,40));
-    mRestart.setText("Restart");
-    mRestart.setColorTextNormal(sf::Color::Black);
-    mRestart.setColorTextHover(sf::Color::Red);
-
+    mPlayRestart.setPosition(sf::Vector2f(400,575));
+    mPlayRestart.setSize(sf::Vector2f(120,40));
+    mPlayRestart.setText("Restart");
+    mPlayRestart.setColorTextNormal(sf::Color::Black);
+    mPlayRestart.setColorTextHover(sf::Color::Red);
     // Button mResults;
-    mResults.setPosition(sf::Vector2f(730,575));
-    mResults.setSize(sf::Vector2f(120,40));
-    mResults.setText("Scores");
-    mResults.setColorTextNormal(sf::Color::Black);
-    mResults.setColorTextHover(sf::Color::Red);
-
+    mPlayResults.setPosition(sf::Vector2f(730,575));
+    mPlayResults.setSize(sf::Vector2f(120,40));
+    mPlayResults.setText("Scores");
+    mPlayResults.setColorTextNormal(sf::Color::Black);
+    mPlayResults.setColorTextHover(sf::Color::Red);
     // Button mQuit;
-    mQuit.setPosition(sf::Vector2f(75,575));
-    mQuit.setSize(sf::Vector2f(120,40));
-    mQuit.setText("Give up");
-    mQuit.setColorTextNormal(sf::Color::Black);
-    mQuit.setColorTextHover(sf::Color::Red);}
+    mPlayQuit.setPosition(sf::Vector2f(75,575));
+    mPlayQuit.setSize(sf::Vector2f(120,40));
+    mPlayQuit.setText("Give up");
+    mPlayQuit.setColorTextNormal(sf::Color::Black);
+    mPlayQuit.setColorTextHover(sf::Color::Red);
+}
 
 /**
  * @brief Checks if a button was pressed, otherwise continues the game
@@ -50,36 +55,44 @@ Play::Play()
  * @param window 
  * @return State 
  */
-State Play::handleInput(sf::Event &e, sf::RenderWindow &window)
+State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
 {
-    // quit, welcome, game, results
-
-    // During the game, I find it unnecessary to have a button to close the whole window 
-    // if (mQuit.handleInput(e, window)) {
-    //     std::cout<<"---Play handleInput()--- QUIT"<<std::endl;
-    //     return quit;
-    // }
-
+    /*
+    *   Buttons (quit, welcome, game, results)
+    */
     // Return to welcome screen
-    if (mQuit.handleInput(e, window)) {
-        std::cout<<"---Play handleInput()--- WELCOME"<<std::endl;
+    if (mPlayQuit.handleInput(event, window)) 
+    {
         return welcome;
     }
-
     // Reset entire game (score, target, weapon, bullet)
-    if (mRestart.handleInput(e, window)) {
-        std::cout<<"---Play handleInput()--- RESTART"<<std::endl;
+    if (mPlayRestart.handleInput(event, window)) 
+    {
+        // window.clear();  maybe needed to reset game?
         return game;
     }
-
     // Results screen
-    if (mResults.handleInput(e, window)) {
-        std::cout<<"---Play handleInput()--- RESULTS"<<std::endl;
+    if (mPlayResults.handleInput(event, window)) 
+    {
         return results;
     }
 
-    // no Button pressed
-    return cont;
+    if (event.type == sf::Event::MouseButtonPressed)
+    {
+        if (event.mouseButton.button == sf::Mouse::Left)
+        {
+            sf::Vector2i mousePixel = sf::Mouse::getPosition(window);
+            sf::Vector2f mouseWorld = window.mapPixelToCoords(mousePixel);
+            
+            mBullet = mGun.fireAt(mouseWorld);
+            mBulletExists = true;
+            
+            mGunshotSound.play();
+
+            std::cout << "Bullet fired" << std::endl;
+        }
+    }
+    return game;
 }
 
 /**
@@ -90,11 +103,36 @@ State Play::handleInput(sf::Event &e, sf::RenderWindow &window)
  */
 void Play::update(double elapsedTime, sf::RenderWindow &window)
 {
+    // Game Loop
+    if(mPlayClock.getElapsedTime().asSeconds() >= mPlayTime)
+    {
+        std::cout << "GAME OVER \n";
+        window.close(); // replace with game over screen
+    }
+    // Bullet update
+    if (mBulletExists)
+    {
+        if (mBullet.isAlive())
+        {
+            mBullet.update(elapsedTime);
+
+            if (mTarget.isAlive())
+            {
+                if (mBulletExists && mTarget.isHit(mBullet.getBounds()))
+                {
+                    mBullet.destroy();
+                    mBulletExists = false;
+
+                    std::cout << "Target hit!\n";
+                }
+            }
+        }
+    }
     // Target mTarget;Button mRestart;Button mResults;Button mQuit;
-    // mTarget.update(elapsedTime, window);
-    mRestart.update();
-    mResults.update();
-    mQuit.update();
+    mTarget.update(elapsedTime); //mTarget.update(elapsedTime, window); 
+    mPlayRestart.update();
+    mPlayResults.update();
+    mPlayQuit.update();
 }
 
 /**
@@ -104,13 +142,16 @@ void Play::update(double elapsedTime, sf::RenderWindow &window)
  */
 void Play::render(sf::RenderWindow &window)
 {
-    // std::cout<<"---Play render()---"<<std::endl;
-    // mTarget.render(window);
-    window.draw(mFrame);
-    window.draw(mRestart);
-    window.draw(mResults);
-    window.draw(mQuit);
+    mPlayBackground.draw(window);
+    // window.draw(mPlayBackground);
+    mGun.render(window);
+    if (mBulletExists)
+    {
+        mBullet.render(window);
+    }
     mTarget.render(window);
-   // mPlay.render(window);
-    
+    window.draw(mPlayFrame);
+    window.draw(mPlayRestart);
+    window.draw(mPlayResults);
+    window.draw(mPlayQuit);
 }

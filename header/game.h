@@ -5,6 +5,8 @@
 #include "welcome.h"
 #include "play.h"
 #include "results.h"
+#include "Music.h"
+#include "Sound.h"
 
 
 
@@ -23,6 +25,6 @@ private:
     Welcome mWelcomeScreen;
     Play mGame;
     Results mResults;
-
+    Music mBackgroundMusic;
 };
 #endif
