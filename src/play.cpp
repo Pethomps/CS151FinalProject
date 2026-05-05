@@ -16,6 +16,8 @@
 Play::Play()
 {
     mBulletExists = false;
+    mScore = 0;
+    mPlayClock.restart();
     mGunshotSound.loadSound("./assets/Audio/gunshot.wav");
     mPlayBackground.loadFile(mBackgroundPNG);
 
@@ -68,7 +70,7 @@ State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
     // Reset entire game (score, target, weapon, bullet)
     if (mPlayRestart.handleInput(event, window)) 
     {
-        // window.clear();  maybe needed to reset game?
+        reset();
         return game;
     }
     // Results screen
@@ -88,8 +90,6 @@ State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
             mBulletExists = true;
             
             mGunshotSound.play();
-
-            std::cout << "Bullet fired" << std::endl;
         }
     }
     return game;
@@ -103,13 +103,7 @@ State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
  */
 void Play::update(double elapsedTime, sf::RenderWindow &window)
 {
-    // Game Loop
-    if(mPlayClock.getElapsedTime().asSeconds() >= mPlayTime)
-    {
-        std::cout << "GAME OVER \n";
-        window.close(); // replace with game over screen
-    }
-    // Bullet update
+    // Bullet
     if (mBulletExists)
     {
         if (mBullet.isAlive())
@@ -122,14 +116,13 @@ void Play::update(double elapsedTime, sf::RenderWindow &window)
                 {
                     mBullet.destroy();
                     mBulletExists = false;
-
-                    std::cout << "Target hit!\n";
+                    mScore++;
                 }
             }
         }
     }
     // Target mTarget;Button mRestart;Button mResults;Button mQuit;
-    mTarget.update(elapsedTime); //mTarget.update(elapsedTime, window); 
+    mTarget.update(elapsedTime); 
     mPlayRestart.update();
     mPlayResults.update();
     mPlayQuit.update();
@@ -143,7 +136,6 @@ void Play::update(double elapsedTime, sf::RenderWindow &window)
 void Play::render(sf::RenderWindow &window)
 {
     mPlayBackground.draw(window);
-    // window.draw(mPlayBackground);
     mGun.render(window);
     if (mBulletExists)
     {
@@ -154,4 +146,13 @@ void Play::render(sf::RenderWindow &window)
     window.draw(mPlayRestart);
     window.draw(mPlayResults);
     window.draw(mPlayQuit);
+}
+
+void Play::reset() 
+{
+    mScore = 0;
+    mBulletExists = false;
+    mPlayClock.restart();
+    mTarget.reset(600.f, 300.f);
+    std::cout<<"Game restarted"<<std::endl;
 }

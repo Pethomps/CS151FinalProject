@@ -14,6 +14,9 @@ class Play
         State handleInput(sf::Event& e,  sf::RenderWindow& window);
         void update(double elapsedTime, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
+        void reset();
+        int getScore() const { return mScore; }
+        bool isTimeUp() const { return mPlayClock.getElapsedTime().asSeconds() >= mPlayTime; }
 
 
     private:
@@ -30,7 +33,7 @@ class Play
         Button mPlayRestart;
         Button mPlayResults;
         Button mPlayQuit;
-        // Target mTarget;
+        int mScore = 0;
 };
 
 #endif
