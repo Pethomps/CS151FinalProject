@@ -8,7 +8,6 @@ Game::Game()
     srand(time(0));
 
     // Sound and music objects
-    mBackgroundMusic;
     mBackgroundMusic.load("./assets/Audio/western-texas-background.ogg");
     mBackgroundMusic.play();
     
@@ -20,7 +19,6 @@ void Game::handleInput(sf::RenderWindow &window)
     sf::Event event;
     while (window.pollEvent(event))
     {
-        // std::cout<<"Game - handleInput"<<std::endl;
         if (event.type == sf::Event::Closed)
         {
             window.close();
@@ -30,7 +28,6 @@ void Game::handleInput(sf::RenderWindow &window)
         {
             case welcome:
             {
-                // std::cout<<"Game - switch mGameState: WELCOME"<<std::endl;
                 mGameState = mWelcomeScreen.handleInput(event, window);
                 break;
             }
@@ -41,7 +38,11 @@ void Game::handleInput(sf::RenderWindow &window)
 
             case game:
             {
-                mGameState = mGame.handleInput(event, window);
+                State nextState = mGame.handleInput(event, window);
+                if (nextState == results) {
+                    mResults.setScore(mGame.getScore());
+                }
+                mGameState = nextState;
                 break;
             }
             case results:
@@ -64,15 +65,20 @@ void Game::update(double elapsedTime, sf::RenderWindow &window)
         break;
     case game:
         mGame.update(elapsedTime,window);
+        if (mGame.isTimeUp()) 
+        {
+            mResults.setScore(mGame.getScore());
+            mGameState = results;
+        }
         break;
     case results:
         mResults.update();
+        break;
     case quit:
         window.close();
         break;
     case cont:
         break;
-
     }
 }
 void Game::render(sf::RenderWindow &window)
