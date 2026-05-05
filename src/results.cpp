@@ -22,21 +22,21 @@ Results::Results()
     mTitle.setOutlineColor(sf::Color(254, 208, 109));
     sf::FloatRect titleBounds = mTitle.getLocalBounds();
     mTitle.setOrigin(titleBounds.width / 2.f, titleBounds.height / 2.f);
-    mTitle.setPosition(400.f, 120.f);
+    mTitle.setPosition(400.f, 50.f);
     // Your Score
     mYourScoreText.setFont(mFont);
     mYourScoreText.setCharacterSize(50);
     mYourScoreText.setFillColor(sf::Color(255, 215, 0));
     sf::FloatRect scoreBounds = mYourScoreText.getLocalBounds();
     mYourScoreText.setOrigin(titleBounds.width / 2.f, titleBounds.height / 2.f);
-    mYourScoreText.setPosition(400.f, 220.f);
+    mYourScoreText.setPosition(480.f, 200.f);
     // High Scores
     mHighScoresText.setFont(mFont);
     mHighScoresText.setCharacterSize(36);
     mHighScoresText.setFillColor(sf::Color(255, 215, 0));
     sf::FloatRect hsBounds = mHighScoresText.getLocalBounds();
     mHighScoresText.setOrigin(hsBounds.width / 2.f, hsBounds.height / 2.f);
-    mHighScoresText.setPosition(400.f, 300.f);
+    mHighScoresText.setPosition(300.f, 255.f);
     // Button Main Menu
     mMainMenu.setText("Main Menu");
     mMainMenu.setPosition({400, 515});
@@ -45,15 +45,15 @@ Results::Results()
     mMainMenu.setColorTextHover(sf::Color(254,208,109));
     // Button Play Again
     mPlayAgain.setText("Play Again");
-    mPlayAgain.setPosition({400, 440});
-    mPlayAgain.setSize({350, 70});
+    mPlayAgain.setPosition({120, 550});
+    mPlayAgain.setSize({200, 70});
     mPlayAgain.setColorTextNormal(sf::Color(249,235,205));
     mPlayAgain.setColorTextHover(sf::Color(254,208,109));
     mPlayAgain.setColor(sf::Color(254,208,109));
     // Button Exit
     mExit.setText("Exit");
-    mExit.setPosition({400, 590});
-    mExit.setSize({350, 70});
+    mExit.setPosition({680, 550});
+    mExit.setSize({200, 70});
     mExit.setColorTextNormal(sf::Color(249,235,205));
     mExit.setColorTextHover(sf::Color(254,208,109));
     mExit.setColor(sf::Color(254,208,109));
@@ -61,7 +61,7 @@ Results::Results()
 
 void Results::setScore(int score)
 {
-    mYourScoreText.setString("Results\n\nScore: " + std::to_string(score));
+    mYourScoreText.setString("Score: " + std::to_string(score));
 
     mHighScoresText.setString(
         "HIGH SCORES\n\n"
