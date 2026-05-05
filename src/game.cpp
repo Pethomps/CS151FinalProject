@@ -8,10 +8,8 @@ Game::Game()
     srand(time(0));
 
     // Sound and music objects
-    mBackgroundMusic;
     mBackgroundMusic.load("./assets/Audio/western-texas-background.ogg");
     mBackgroundMusic.play();
-    
 }
 
 
@@ -20,7 +18,6 @@ void Game::handleInput(sf::RenderWindow &window)
     sf::Event event;
     while (window.pollEvent(event))
     {
-        // std::cout<<"Game - handleInput"<<std::endl;
         if (event.type == sf::Event::Closed)
         {
             window.close();
@@ -30,7 +27,6 @@ void Game::handleInput(sf::RenderWindow &window)
         {
             case welcome:
             {
-                // std::cout<<"Game - switch mGameState: WELCOME"<<std::endl;
                 mGameState = mWelcomeScreen.handleInput(event, window);
                 break;
             }
@@ -41,12 +37,28 @@ void Game::handleInput(sf::RenderWindow &window)
 
             case game:
             {
-                mGameState = mGame.handleInput(event, window);
+                State nextState = mGame.handleInput(event, window);
+                if (nextState == results) {
+                    mResults.setScore(mGame.getScore());
+                }
+                mGameState = nextState;
                 break;
             }
             case results:
+            {
                 mGameState = mResults.handleInput(event,window);
                 break;
+            }
+            case gameover:
+            {
+                // mGameState = mGameOver.handleInput(event, window);
+                // State nextState = mGameOver.handleInput(event, window);
+                // if (nextState == game)
+                // {
+                //     mGame.reset();
+                // }
+                break;
+            }
             case quit:
             {
                 window.close();
@@ -64,15 +76,23 @@ void Game::update(double elapsedTime, sf::RenderWindow &window)
         break;
     case game:
         mGame.update(elapsedTime,window);
+        if (mGame.isTimeUp()) 
+        {
+            mResults.setScore(mGame.getScore());
+            mGameState = results;
+        }
         break;
     case results:
         mResults.update();
+        break;
+    case gameover:
+        // mGameOver.update();
+        break;
     case quit:
         window.close();
         break;
     case cont:
         break;
-
     }
 }
 void Game::render(sf::RenderWindow &window)
@@ -88,6 +108,9 @@ void Game::render(sf::RenderWindow &window)
             break;
         case results:
             mResults.render(window);
+            break;
+        case gameover:
+            // mGameOver.render(window);
             break;
         case quit:
             break;
