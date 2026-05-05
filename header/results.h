@@ -9,6 +9,7 @@ class Results
         State handleInput(sf::Event& e, sf::RenderWindow& window);
         void update();
         void render(sf::RenderWindow& window);
+        void setScore(int score);
 
 
     private:

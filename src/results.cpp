@@ -1,4 +1,7 @@
 #include "../header/results.h"
+#include <string>
+
+
 Results::Results()
 {
     if (!mFont.loadFromFile("./assets/Fonts/VintageCharm-Regular.otf"))
@@ -50,4 +53,9 @@ void Results::render(sf::RenderWindow &window)
     window.draw(mScores);
     window.draw(mPlayAgain);
     window.draw(mLeave);
+}
+
+void Results::setScore(int score)
+{
+    mResults.setString("Results\n\nScore: " + std::to_string(score));
 }
