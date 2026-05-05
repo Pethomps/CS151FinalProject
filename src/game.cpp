@@ -10,7 +10,6 @@ Game::Game()
     // Sound and music objects
     mBackgroundMusic.load("./assets/Audio/western-texas-background.ogg");
     mBackgroundMusic.play();
-    
 }
 
 
@@ -46,8 +45,20 @@ void Game::handleInput(sf::RenderWindow &window)
                 break;
             }
             case results:
+            {
                 mGameState = mResults.handleInput(event,window);
                 break;
+            }
+            case gameover:
+            {
+                // mGameState = mGameOver.handleInput(event, window);
+                // State nextState = mGameOver.handleInput(event, window);
+                // if (nextState == game)
+                // {
+                //     mGame.reset();
+                // }
+                break;
+            }
             case quit:
             {
                 window.close();
@@ -74,6 +85,9 @@ void Game::update(double elapsedTime, sf::RenderWindow &window)
     case results:
         mResults.update();
         break;
+    case gameover:
+        // mGameOver.update();
+        break;
     case quit:
         window.close();
         break;
@@ -94,6 +108,9 @@ void Game::render(sf::RenderWindow &window)
             break;
         case results:
             mResults.render(window);
+            break;
+        case gameover:
+            // mGameOver.render(window);
             break;
         case quit:
             break;
