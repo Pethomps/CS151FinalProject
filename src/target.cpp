@@ -27,9 +27,32 @@ Target::Target(float x, float y, float radius)
         std::cout << "Failed to load duck texture\n";
     }
     mTarget.setTexture(mTexture);
-    mTarget.setPosition(x, y);
     mTarget.setScale(0.2f, 0.2f);
 
+    //Hit message setup
+    if(!mFont.loadFromFile("assets/Fonts/KGPerfectPenmanship.otf"))
+    {
+        std::cout << "Failed to load font\n";
+    }
+
+    mHitText.setFont(mFont);
+    mHitText.setString("HIT!");
+    mHitText.setCharacterSize(30);
+    mHitText.setFillColor(sf::Color(255, 86, 0));
+
+    
+    sf::FloatRect textBounds = mHitText.getLocalBounds();
+    mHitText.setOrigin(textBounds.left + textBounds.width / 2.f, textBounds.top + textBounds.height / 2.f); 
+
+    reset(x, y);
+}
+
+void Target::reset(float x, float y) 
+{
+    mAlive = true;
+    mExploding = false;
+    mTarget.setPosition(x, y);
+    
     // Target movement setup
     mSpeed = 60.f; //starting speed
 
@@ -45,22 +68,11 @@ Target::Target(float x, float y, float radius)
     mVelocity = sf::Vector2f(moveX, moveY);
 
     float length = sqrt(moveX * moveX + moveY * moveY);
-    mVelocity.x /= length;
-    mVelocity.y /= length;
-
-    //Hit message setup
-    if(!mFont.loadFromFile("assets/Fonts/KGPerfectPenmanship.otf"))
+    if (length != 0.f) 
     {
-        std::cout << "Failed to load font\n";
+        mVelocity.x /= length;
+        mVelocity.y /= length;
     }
-
-    mHitText.setFont(mFont);
-    mHitText.setString("HIT!");
-    mHitText.setCharacterSize(30);
-    mHitText.setFillColor(sf::Color(255, 86, 0));
-
-    sf::FloatRect textBounds = mHitText.getLocalBounds();
-    mHitText.setOrigin(textBounds.left + textBounds.width / 2.f, textBounds.top + textBounds.height / 2.f); 
 }
 
 /**
