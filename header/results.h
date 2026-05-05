@@ -1,5 +1,9 @@
+#ifndef RESULTS_H
+#define RESULTS_H
+
 #include "../header/button.h"
 #include "../header/states.h"
+#include "background.h"
 
 
 class Results
@@ -11,11 +15,18 @@ class Results
         void render(sf::RenderWindow& window);
         void setScore(int score);
 
-
     private:
-        sf::Text mResults;
-        Button mScores;
-        Button mPlayAgain;  
-        Button mLeave;
+        sf::Text mTitle;
+        sf::Text mYourScoreText;
+        sf::Text mHighScoresText;
         sf::Font mFont;
+
+        Button mMainMenu;
+        Button mPlayAgain;  
+        Button mExit;
+
+        Background mBackground;
+
 };
+
+#endif
