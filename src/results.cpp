@@ -59,18 +59,22 @@ Results::Results()
     mExit.setColor(sf::Color(254,208,109));
 }
 
-void Results::setScore(int score)
+void Results::setScore(int newScore)
 {
-    mYourScoreText.setString("Score: " + std::to_string(score));
+    std::vector <int> scores {33, 18, 9, 6, 3, 2, 0, 0, 0};
+    std::string highScores = "HIGH SCORES\n\n";
 
-    mHighScoresText.setString(
-        "HIGH SCORES\n\n"
-        "1. 28\n"
-        "2. 25\n"
-        "3. " + std::to_string(score) + "   <--- YOU\n"
-        "4. 16\n"
-        "5. 12\n"
-    );
+    for (int i=0; i<5; i++) {
+        if (newScore > scores[i]) {
+            scores.insert(scores.begin() + i, newScore);
+            highScores = highScores + std::to_string(i+1)+". "+std::to_string(scores[i]) +"   <--- YOU\n""\n";
+        } else {
+            highScores = highScores + std::to_string(i+1)+". "+std::to_string(scores[i]) +"\n";
+        }
+    }
+    mYourScoreText.setString("Score: " + std::to_string(newScore));
+
+    mHighScoresText.setString(highScores);
 }
 
 State Results::handleInput(sf::Event &e, sf::RenderWindow &window)
