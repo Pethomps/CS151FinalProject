@@ -157,5 +157,4 @@ void Play::reset()
     mBulletExists = false;
     mPlayClock.restart();
     mTarget.reset(600.f, 300.f);
-    std::cout<<"Game restarted"<<std::endl;
 }
