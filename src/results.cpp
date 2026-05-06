@@ -27,7 +27,6 @@ Results::Results()
     mYourScoreText.setFont(mFont);
     mYourScoreText.setCharacterSize(50);
     mYourScoreText.setFillColor(sf::Color(255, 215, 0));
-    sf::FloatRect scoreBounds = mYourScoreText.getLocalBounds();
     mYourScoreText.setOrigin(titleBounds.width / 2.f, titleBounds.height / 2.f);
     mYourScoreText.setPosition(480.f, 200.f);
     // High Scores
@@ -69,9 +68,9 @@ void Results::setScore(int newScore)
         if (!insertScore && newScore > scores[i]) {
             scores.insert(scores.begin() + i, newScore);
             insertScore = true;
-            highScores = highScores + std::to_string(i+1)+". "+std::to_string(scores[i]) +"   <--- YOU\n""\n";
+            highScores += std::to_string(i+1)+". "+std::to_string(scores[i]) +"   <--- YOU\n";
         } else {
-            highScores = highScores + std::to_string(i+1)+". "+std::to_string(scores[i]) +"\n";
+            highScores += std::to_string(i+1)+". "+std::to_string(scores[i]) +"\n";
         }
     }
     mYourScoreText.setString("Score: " + std::to_string(newScore));
