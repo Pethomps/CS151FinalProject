@@ -1,4 +1,7 @@
 #include "../header/weapon.h"
+#include <SFML/Graphics.hpp>
+#include <cmath>
+#include <iostream>
 
 
     Weapon::Weapon(sf::Vector2f muzzlePosition, float bulletSpeed)
@@ -34,29 +37,41 @@
     Bullet::Bullet(sf::Vector2f startPos, sf::Vector2f direction, float speed)
         : mAlive(true)
     {
-        mShape.setRadius(5.f);
-        mShape.setOrigin(5.f, 5.f);
-        mShape.setPosition(startPos);
-        mShape.setFillColor(sf::Color::Yellow);
-        mVelocity = direction * speed;
+    if (!mTexture.loadFromFile("Images/Weapon/cat.png"))
+    {
+        std::cout << "Failed to load cat texture\n";
     }
+
+    mSprite.setTexture(mTexture);
+    mSprite.setScale(0.05f, 0.05f);
+
+    mSprite.setOrigin(
+    mSprite.getLocalBounds().width / 2.f,
+    mSprite.getLocalBounds().height / 2.f
+    );
+
+    mSprite.setPosition(startPos);
+
+    mVelocity = direction * speed;
+}
 
     void Bullet::update(float dt)
     {
-        mShape.move(mVelocity * dt);
+        mSprite.move(mVelocity * dt);
+        mSprite.rotate(360.f * dt);
     }
 
     void Bullet::render(sf::RenderWindow &window) const
     {
         if (mAlive)
         {
-            window.draw(mShape);
+            window.draw(mSprite);
         }
     }
 
     sf::FloatRect Bullet::getBounds() const
     {
-        return mShape.getGlobalBounds();
+        return mSprite.getGlobalBounds();
     }
 
     bool Bullet::isAlive() const

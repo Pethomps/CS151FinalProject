@@ -7,7 +7,8 @@
 class Bullet
 {
 private:
-    sf::CircleShape mShape;
+    sf::Texture mTexture;
+    sf::Sprite mSprite; 
     sf::Vector2f mVelocity;
     bool mAlive;
 

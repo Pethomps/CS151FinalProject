@@ -35,6 +35,7 @@ Target::Target(float x, float y, float radius)
         std::cout << "Failed to load font\n";
     }
 
+
     mHitText.setFont(mFont);
     mHitText.setString("HIT!");
     mHitText.setCharacterSize(30);
