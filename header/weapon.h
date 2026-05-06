@@ -21,7 +21,7 @@ public:
     bool isAlive() const;
     void destroy();
 };
-
+ 
 class Weapon
 {
 private:

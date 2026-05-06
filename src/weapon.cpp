@@ -33,13 +33,15 @@
         window.draw(gunShape);
     }
 
-
     Bullet::Bullet(sf::Vector2f startPos, sf::Vector2f direction, float speed)
         : mAlive(true)
     {
-    if (!mTexture.loadFromFile("Images/Weapon/cat.png"))
+    if (!mTexture.loadFromFile("assets/Images/cat.png"))
     {
         std::cout << "Failed to load cat texture\n";
+    }
+    else{
+        std::cout << "File loaded\n";
     }
 
     mSprite.setTexture(mTexture);
@@ -53,7 +55,7 @@
     mSprite.setPosition(startPos);
 
     mVelocity = direction * speed;
-}
+    }
 
     void Bullet::update(float dt)
     {
