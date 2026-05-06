@@ -65,3 +65,35 @@ obj:
 	mkdir -p $@
 clean: 
 	rm -r obj/*.o game 
+
+
+################################################
+#             Mac OS Compatible                #
+################################################
+# CFLAGS = g++ -Wall -std=c++17 -pedantic-errors
+
+# SFML_INCLUDE = -I$(shell brew --prefix sfml)/include
+# SFML_LIB = -L$(shell brew --prefix sfml)/lib
+
+# game: obj/main.o obj/background.o obj/button.o obj/weapon.o obj/target.o
+# 	$(CFLAGS) $(SFML_INCLUDE) $^ -o game $(SFML_LIB) -lsfml-graphics -lsfml-window -lsfml-system
+
+# obj/main.o: src/main.cpp header/game.h
+# 	$(CFLAGS) $(SFML_INCLUDE) -c src/main.cpp -o obj/main.o
+
+# obj/game.o: src/game.cpp header/game.h
+# 	$(CFLAGS) $(SFML_INCLUDE) -c src/game.cpp -o obj/game.o
+
+# obj/button.o: src/button.cpp header/button.h
+# 	$(CFLAGS) $(SFML_INCLUDE) -c src/button.cpp -o obj/button.o
+
+# obj/background.o: src/background.cpp header/background.h
+# 	$(CFLAGS) $(SFML_INCLUDE) -c src/background.cpp -o obj/background.o
+# obj/weapon.o: src/weapon.cpp header/weapon.h
+# 	$(CFLAGS) $(SFML_INCLUDE) -c src/weapon.cpp -o obj/weapon.o
+
+# obj/target.o: src/target.cpp header/target.h
+# 	$(CFLAGS) $(SFML_INCLUDE) -c src/target.cpp -o obj/target.o
+
+# clean: 
+# 	rm -f obj/*.o game
