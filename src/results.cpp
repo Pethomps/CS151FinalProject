@@ -64,9 +64,11 @@ void Results::setScore(int newScore)
     std::vector <int> scores {33, 18, 9, 6, 3, 2, 0, 0, 0};
     std::string highScores = "HIGH SCORES\n\n";
 
+    bool insertScore = false;
     for (int i=0; i<5; i++) {
-        if (newScore > scores[i]) {
+        if (!insertScore && newScore > scores[i]) {
             scores.insert(scores.begin() + i, newScore);
+            insertScore = true;
             highScores = highScores + std::to_string(i+1)+". "+std::to_string(scores[i]) +"   <--- YOU\n""\n";
         } else {
             highScores = highScores + std::to_string(i+1)+". "+std::to_string(scores[i]) +"\n";

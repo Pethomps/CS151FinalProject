@@ -19,10 +19,10 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Single Bullet Test");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Duck Hunt");
     window.setFramerateLimit(60);
     sf::Clock clock;
-    Game game;
+    Game game(window);
     
     while (window.isOpen())
     {
