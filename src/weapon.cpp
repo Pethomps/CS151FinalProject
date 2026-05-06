@@ -1,4 +1,5 @@
 #include "../header/weapon.h"
+#include <iostream>
 
 
     Weapon::Weapon(sf::Vector2f muzzlePosition, float bulletSpeed)
