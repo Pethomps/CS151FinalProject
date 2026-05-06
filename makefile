@@ -58,4 +58,4 @@ TESTS/catch_amalgamated.o: TESTS/catch_amalgamated.cpp TESTS/catch_amalgamated.h
 obj:
 	mkdir -p $@
 clean: 
-	rm -r obj/*.o
+	rm -r obj/*.o game 
