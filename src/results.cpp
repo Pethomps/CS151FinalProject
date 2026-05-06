@@ -27,7 +27,6 @@ Results::Results()
     mYourScoreText.setFont(mFont);
     mYourScoreText.setCharacterSize(50);
     mYourScoreText.setFillColor(sf::Color(255, 215, 0));
-    sf::FloatRect scoreBounds = mYourScoreText.getLocalBounds();
     mYourScoreText.setOrigin(titleBounds.width / 2.f, titleBounds.height / 2.f);
     mYourScoreText.setPosition(480.f, 200.f);
     // High Scores
