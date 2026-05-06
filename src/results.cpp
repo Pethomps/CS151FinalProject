@@ -68,9 +68,9 @@ void Results::setScore(int newScore)
         if (!insertScore && newScore > scores[i]) {
             scores.insert(scores.begin() + i, newScore);
             insertScore = true;
-            highScores = highScores + std::to_string(i+1)+". "+std::to_string(scores[i]) +"   <--- YOU\n""\n";
+            highScores += std::to_string(i+1)+". "+std::to_string(scores[i]) +"   <--- YOU\n";
         } else {
-            highScores = highScores + std::to_string(i+1)+". "+std::to_string(scores[i]) +"\n";
+            highScores += std::to_string(i+1)+". "+std::to_string(scores[i]) +"\n";
         }
     }
     mYourScoreText.setString("Score: " + std::to_string(newScore));
