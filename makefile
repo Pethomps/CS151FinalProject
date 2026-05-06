@@ -139,7 +139,7 @@ clean:
 
 # obj:
 # 	mkdir -p $@
-clean: 
-	rm -f obj/*.o game game 
+# clean: 
+# 	rm -f obj/*.o game game 
 # clean: 
 # 	rm -f obj/*.o game
