@@ -19,7 +19,7 @@ Welcome::Welcome()
     mHeader.setString("DUCK\nHUNT");
     mHeader.setPosition({255,125});
 
-    mRules.setText("Rules");
+    mRules.setText("How to Play");
     mRules.setPosition({400,550});
     mRules.setSize({300,60});
     mRules.setColorTextNormal(sf::Color(249,235,205));

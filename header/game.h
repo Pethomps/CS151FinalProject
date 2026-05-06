@@ -8,6 +8,7 @@
 #include "Music.h"
 #include "Sound.h"
 #include "GameOver.h"
+#include "rules.h"
 
 
 
@@ -26,6 +27,7 @@ private:
     Welcome mWelcomeScreen;
     Play mGame;
     Results mResults;
+    Rules mRules;
     GameOver mGameOver;
     Music mBackgroundMusic;
 };
