@@ -34,20 +34,23 @@ Play::Play()
     mPlayRestart.setPosition(sf::Vector2f(400,575));
     mPlayRestart.setSize(sf::Vector2f(120,40));
     mPlayRestart.setText("Restart");
-    mPlayRestart.setColorTextNormal(sf::Color::Black);
-    mPlayRestart.setColorTextHover(sf::Color::Red);
+    mPlayRestart.setColorTextNormal(sf::Color(249,235,205));
+    mPlayRestart.setColorTextHover(sf::Color(254,208,109));
+    mPlayRestart.setColor(sf::Color(254,208,109));
     // Button mResults;
     mPlayResults.setPosition(sf::Vector2f(730,575));
     mPlayResults.setSize(sf::Vector2f(120,40));
     mPlayResults.setText("Scores");
-    mPlayResults.setColorTextNormal(sf::Color::Black);
-    mPlayResults.setColorTextHover(sf::Color::Red);
+    mPlayResults.setColorTextNormal(sf::Color(249,235,205));
+    mPlayResults.setColorTextHover(sf::Color(254,208,109));
+    mPlayResults.setColor(sf::Color(254,208,109));
     // Button mQuit;
     mPlayQuit.setPosition(sf::Vector2f(75,575));
     mPlayQuit.setSize(sf::Vector2f(120,40));
     mPlayQuit.setText("Give up");
-    mPlayQuit.setColorTextNormal(sf::Color::Black);
-    mPlayQuit.setColorTextHover(sf::Color::Red);
+    mPlayQuit.setColorTextNormal(sf::Color(249,235,205));
+    mPlayQuit.setColorTextHover(sf::Color(254,208,109));
+    mPlayQuit.setColor(sf::Color(254,208,109));
 }
 
 /**
