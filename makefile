@@ -6,6 +6,9 @@ game: obj/main.o obj/background.o obj/button.o obj/GameOver.o \
 	  obj/Sound.o 
 	$(CFLAGS) $^ -o game -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
+run:
+	./game
+
 obj/main.o: src/main.cpp header/game.h | obj
 	$(CFLAGS) -c src/main.cpp -o obj/main.o
 
