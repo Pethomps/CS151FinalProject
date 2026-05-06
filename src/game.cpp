@@ -1,7 +1,8 @@
 #include "../header/game.h"
 #include "../header/states.h"
+#include "../header/GameOver.h"
 
-Game::Game()
+Game::Game(sf::RenderWindow &window) : mGameOver(window)
 {
     mGameState = welcome;
     // Use current time as seed for random generator
@@ -30,6 +31,11 @@ void Game::handleInput(sf::RenderWindow &window)
                 mGameState = mWelcomeScreen.handleInput(event, window);
                 break;
             }
+            case rules:
+            {
+                mGameState = mRules.handleInput(event, window);
+                break;
+            }
             case cont:
             {
                 break;
@@ -47,16 +53,23 @@ void Game::handleInput(sf::RenderWindow &window)
             case results:
             {
                 mGameState = mResults.handleInput(event,window);
+                State nextState = mResults.handleInput(event, window);
+                if (nextState == game)
+                {
+                    mGame.reset();
+                }
+                mGameState = nextState;
                 break;
             }
             case gameover:
             {
-                // mGameState = mGameOver.handleInput(event, window);
-                // State nextState = mGameOver.handleInput(event, window);
-                // if (nextState == game)
-                // {
-                //     mGame.reset();
-                // }
+                mGameState = mGameOver.handleInput(event, window);
+                State nextState = mGameOver.handleInput(event, window);
+                if (nextState == game)
+                {
+                    mGame.reset();
+                }
+                mGameState = nextState;
                 break;
             }
             case quit:
@@ -74,12 +87,15 @@ void Game::update(double elapsedTime, sf::RenderWindow &window)
     case welcome:
         mWelcomeScreen.update();
         break;
+    case rules:
+        mRules.update();
+        break;
     case game:
         mGame.update(elapsedTime,window);
         if (mGame.isTimeUp()) 
         {
             mResults.setScore(mGame.getScore());
-            mGameState = results;
+            mGameState = gameover;
         }
         break;
     case results:
@@ -103,6 +119,9 @@ void Game::render(sf::RenderWindow &window)
         case welcome:
             mWelcomeScreen.render(window);
             break;
+        case rules:
+            mRules.render(window);
+            break;
         case game:
             mGame.render(window);
             break;
@@ -110,7 +129,7 @@ void Game::render(sf::RenderWindow &window)
             mResults.render(window);
             break;
         case gameover:
-            // mGameOver.render(window);
+            mGameOver.render(window);
             break;
         case quit:
             break;

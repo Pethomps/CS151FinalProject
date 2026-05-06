@@ -8,13 +8,14 @@
 #include "Music.h"
 #include "Sound.h"
 #include "GameOver.h"
+#include "rules.h"
 
 
 
 class Game 
 {
 public:
-    Game();
+    Game(sf::RenderWindow &window);
     ~Game(){}
 
     void handleInput(sf::RenderWindow &window);
@@ -26,6 +27,7 @@ private:
     Welcome mWelcomeScreen;
     Play mGame;
     Results mResults;
+    Rules mRules;
     GameOver mGameOver;
     Music mBackgroundMusic;
 };

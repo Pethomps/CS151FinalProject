@@ -3,7 +3,7 @@ CFLAGS = g++ -Wall -std=c++17 -pedantic-errors
 game: obj/main.o obj/background.o obj/button.o obj/GameOver.o \
       obj/game.o obj/weapon.o obj/target.o obj/welcome.o \
       obj/play.o obj/results.o obj/states.o obj/Music.o \
-	  obj/Sound.o 
+	  obj/Sound.o obj/rules.o
 	$(CFLAGS) $^ -o game -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 run:
@@ -41,6 +41,9 @@ obj/background.o: src/background.cpp header/background.h | obj
 
 obj/GameOver.o: src/GameOver.cpp header/GameOver.h | obj
 	$(CFLAGS) -c src/GameOver.cpp -o obj/GameOver.o
+
+obj/rules.o: src/rules.cpp header/rules.h | obj
+	$(CFLAGS) -c src/rules.cpp -o obj/rules.o
 
 obj/Sound.o: src/Sound.cpp header/Sound.h | obj
 	$(CFLAGS) -c src/Sound.cpp -o obj/Sound.o
