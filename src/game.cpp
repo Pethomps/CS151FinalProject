@@ -30,6 +30,11 @@ void Game::handleInput(sf::RenderWindow &window)
                 mGameState = mWelcomeScreen.handleInput(event, window);
                 break;
             }
+            case rules:
+            {
+                mGameState = mRules.handleInput(event, window);
+                break;
+            }
             case cont:
             {
                 break;
@@ -74,6 +79,9 @@ void Game::update(double elapsedTime, sf::RenderWindow &window)
     case welcome:
         mWelcomeScreen.update();
         break;
+    case rules:
+        mRules.update();
+        break;
     case game:
         mGame.update(elapsedTime,window);
         if (mGame.isTimeUp()) 
@@ -102,6 +110,9 @@ void Game::render(sf::RenderWindow &window)
     {
         case welcome:
             mWelcomeScreen.render(window);
+            break;
+        case rules:
+            mRules.render(window);
             break;
         case game:
             mGame.render(window);
