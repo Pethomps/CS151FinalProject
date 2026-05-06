@@ -8,6 +8,7 @@
 #include "../header/weapon.h"
 #include "../header/target.h"
 #include "../header/background.h"
+#include "../header/GameOver.h"
 
 
 // ----------------------------------------------
@@ -60,19 +61,25 @@ TEST_CASE("Button class constructor initializes correctly") {
 //     Welcome w = Welcome();
 //     REQUIRE(true);  // object initialized
 // }
-TEST_CASE("Weapon class default constructor initializes correctly") {
-    Weapon w = Weapon();
-    REQUIRE(true);  // object initialized
-}
-TEST_CASE("Target class default constructor initializes correctly") {
-    Target t = Target();
-    REQUIRE(true);  // object initialized
-}
+// TEST_CASE("Weapon class default constructor initializes correctly") {
+//     Weapon w = Weapon();
+//     REQUIRE(true);  // object initialized
+// }
+// TEST_CASE("Target class default constructor initializes correctly") {
+//     Target t = Target();
+//     REQUIRE(true);  // object initialized
+//}
 TEST_CASE("Background class default constructor initializes correctly") {
     Background b = Background();
     REQUIRE(true);  // object initialized
 }
+TEST_CASE("GameOver class default constructor initializes correctly")
+{
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
 
+    GameOver go(window);
+    REQUIRE(true); // constructor runs properly
+}
 // ----------------------------------------------
 // Button
 // ----------------------------------------------
@@ -127,11 +134,106 @@ TEST_CASE("Background functions work correctly") {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
 
     SECTION("background object loads file successfully") {
-        b.loadFile("Background1.png", window);
+        b.loadFile("../assets/Background1.png", window);
         REQUIRE(true);
     }
     // We can test for failure-to-load-file if it throws an exception instead of exit(1)
     // SECTION("background object fails successfully") {
     //     REQUIRE_THROWS_AS( b.loadFile("notAFile.png", window), ifstream::badbit );
     // }
+}
+
+// ----------------------------------------------
+// Game Over
+// ----------------------------------------------
+TEST_CASE("Test GameOver resize correctly")
+{
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
+
+    GameOver go(window);
+    
+    SECTION("Resize window background to different size"){
+        window.setSize(sf::Vector2u(1000, 800));
+        go.resize(window);
+
+        REQUIRE(true);
+    }
+}
+
+TEST_CASE("Test GameOver draw function")
+{
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Test");
+
+    GameOver go(window);
+    
+    SECTION("Draw works correctly"){
+        go.draw(window);
+        REQUIRE(true);
+    }
+}
+
+// ----------------------------------------------
+// Target
+// ----------------------------------------------
+TEST_CASE("Test target initialize alive")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    REQUIRE(t.isAlive() == true);
+}
+
+TEST_CASE("Target moves when updated")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    sf::Vector2f before = t.getPosition();
+
+    t.update(1.f); // 1 second
+
+    sf::Vector2f after = t.getPosition();
+
+    REQUIRE(after != before);
+}
+
+TEST_CASE("Target detects hit")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    SECTION("Detects hit correclly")
+    {
+        sf::FloatRect bullet(100.f, 100.f, 5.f, 5.f);
+        REQUIRE(t.isHit(bullet) == true);
+    }
+
+    SECTION("Does not detect hit")
+    {
+        sf::FloatRect bullet(400.f, 400.f, 5.f, 5.f);
+        REQUIRE(t.isHit(bullet) == false);
+    }
+}
+
+TEST_CASE("Test change position")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    sf::Vector2f before = t.getPosition();
+
+    t.newPosition();
+
+    sf::Vector2f after = t.getPosition();
+
+    REQUIRE(after != before);
+}
+
+TEST_CASE("Test speed increase")
+{
+    Target t(100.f, 100.f, 10.f);
+
+    float before = t.getSpeed();
+
+    t.newPosition();
+
+    float after = t.getSpeed();
+
+    REQUIRE(after > before);
 }

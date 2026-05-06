@@ -5,48 +5,52 @@
  * 
  */
 #include "../header/play.h"
-
+#include "../header/target.h"
 
 
 /**
  * @brief Default constructor for Play object
  *          - sets frame and target boundary (based on frame)
- *          - sets buttons: restart, rules, results, quit
+ *          - sets buttons: restart, results, quit
  */
 Play::Play()
 {
+    mBulletExists = false;
+    mScore = 0;
+    mPlayClock.restart();
+    mGunshotSound.loadSound("./assets/Audio/gunshot.wav");
+    mPlayBackground.loadFile(mBackgroundPNG);
+
+    /*
+    *   Frame & Buttons
+    */
     // sf::RectangleShape mFrame;
-    mFrame.setSize(sf::Vector2f(580,400));
-    mFrame.setPosition(sf::Vector2f(30,20));
-    mFrame.setOutlineColor(sf::Color::White);
-    mFrame.setOutlineThickness(5);
-
-    // Target mTarget;
-    mTarget.setBoundary(30, 20, 580, 400);
-    
+    mPlayFrame.setSize(sf::Vector2f(800,600));
+    mPlayFrame.setPosition(sf::Vector2f(0,0));
+    mPlayFrame.setOutlineColor(sf::Color::Black);
+    mPlayFrame.setOutlineThickness(5);
+    mPlayFrame.setFillColor(sf::Color::Transparent);
     // Button mRestart;  
-    mRestart.setPosition(sf::Vector2f(420,450));
-    mRestart.setSize(sf::Vector2f(60,20));
-    mRestart.setText("Restart");
-    mRestart.setColorTextNormal(sf::Color::Red);
-    // mRestart.setColor();
-
-    // Button mRules;
-    mRules.setPosition(sf::Vector2f(220,450));
-    mRules.setSize(sf::Vector2f(60,20));
-    mRules.setText("Rules");
-    mRules.setColorTextNormal(sf::Color::Red);
+    mPlayRestart.setPosition(sf::Vector2f(400,575));
+    mPlayRestart.setSize(sf::Vector2f(120,40));
+    mPlayRestart.setText("Restart");
+    mPlayRestart.setColorTextNormal(sf::Color(249,235,205));
+    mPlayRestart.setColorTextHover(sf::Color(254,208,109));
+    mPlayRestart.setColor(sf::Color(254,208,109));
     // Button mResults;
-    mResults.setPosition(sf::Vector2f(580,450));
-    mResults.setSize(sf::Vector2f(60,20));
-    mResults.setText("Scores");
-    mResults.setColorTextNormal(sf::Color::Red);
+    mPlayResults.setPosition(sf::Vector2f(730,575));
+    mPlayResults.setSize(sf::Vector2f(120,40));
+    mPlayResults.setText("Scores");
+    mPlayResults.setColorTextNormal(sf::Color(249,235,205));
+    mPlayResults.setColorTextHover(sf::Color(254,208,109));
+    mPlayResults.setColor(sf::Color(254,208,109));
     // Button mQuit;
-    mQuit.setPosition(sf::Vector2f(60,450));
-    mQuit.setSize(sf::Vector2f(60,20));
-    mQuit.setText("Give up");
-    mQuit.setColorTextNormal(sf::Color::Red);
-    // mQuit.setColor();
+    mPlayQuit.setPosition(sf::Vector2f(75,575));
+    mPlayQuit.setSize(sf::Vector2f(120,40));
+    mPlayQuit.setText("Give up");
+    mPlayQuit.setColorTextNormal(sf::Color(249,235,205));
+    mPlayQuit.setColorTextHover(sf::Color(254,208,109));
+    mPlayQuit.setColor(sf::Color(254,208,109));
 }
 
 /**
@@ -56,22 +60,41 @@ Play::Play()
  * @param window 
  * @return State 
  */
-State Play::handleInput(sf::Event &e, sf::RenderWindow &window)
+State Play::handleInput(sf::Event &event, sf::RenderWindow &window)
 {
-    // quit, welcome, game, results
-    if (mQuit.handleInput(e, window)) {
-        return quit;
-    }
-    if (mQuit.handleInput(e, window)) {
+    /*
+    *   Buttons (quit, welcome, game, results)
+    */
+    // Return to welcome screen
+    if (mPlayQuit.handleInput(event, window)) 
+    {
         return welcome;
     }
-    if (mRestart.handleInput(e, window)) {
+    // Reset entire game (score, target, weapon, bullet)
+    if (mPlayRestart.handleInput(event, window)) 
+    {
+        reset();
         return game;
     }
-    if (mResults.handleInput(e, window)) {
+    // Results screen
+    if (mPlayResults.handleInput(event, window)) 
+    {
         return results;
     }
-    // no Button pressed
+
+    if (event.type == sf::Event::MouseButtonPressed)
+    {
+        if (event.mouseButton.button == sf::Mouse::Left)
+        {
+            sf::Vector2i mousePixel = sf::Mouse::getPosition(window);
+            sf::Vector2f mouseWorld = window.mapPixelToCoords(mousePixel);
+            
+            mBullet = mGun.fireAt(mouseWorld);
+            mBulletExists = true;
+            
+            mGunshotSound.play();
+        }
+    }
     return game;
 }
 
@@ -83,12 +106,29 @@ State Play::handleInput(sf::Event &e, sf::RenderWindow &window)
  */
 void Play::update(double elapsedTime, sf::RenderWindow &window)
 {
-    // Target mTarget;Button mRestart;Button mRules;Button mResults;Button mQuit;
-    mTarget.update(elapsedTime, window);
-    mRestart.update();
-    mRules.update();
-    mResults.update();
-    mQuit.update();
+    // Bullet
+    if (mBulletExists)
+    {
+        if (mBullet.isAlive())
+        {
+            mBullet.update(elapsedTime);
+
+            if (mTarget.isAlive())
+            {
+                if (mBulletExists && mTarget.isHit(mBullet.getBounds()))
+                {
+                    mBullet.destroy();
+                    mBulletExists = false;
+                    mScore++;
+                }
+            }
+        }
+    }
+    // Target mTarget;Button mRestart;Button mResults;Button mQuit;
+    mTarget.update(elapsedTime); 
+    mPlayRestart.update();
+    mPlayResults.update();
+    mPlayQuit.update();
 }
 
 /**
@@ -98,10 +138,23 @@ void Play::update(double elapsedTime, sf::RenderWindow &window)
  */
 void Play::render(sf::RenderWindow &window)
 {
+    mPlayBackground.draw(window);
+    mGun.render(window);
+    if (mBulletExists)
+    {
+        mBullet.render(window);
+    }
     mTarget.render(window);
-    window.draw(mFrame);
-    window.draw(mRestart);
-    window.draw(mRules);
-    window.draw(mResults);
-    window.draw(mQuit);
+    window.draw(mPlayFrame);
+    window.draw(mPlayRestart);
+    window.draw(mPlayResults);
+    window.draw(mPlayQuit);
+}
+
+void Play::reset() 
+{
+    mScore = 0;
+    mBulletExists = false;
+    mPlayClock.restart();
+    mTarget.reset(600.f, 300.f);
 }

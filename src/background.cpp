@@ -13,7 +13,7 @@ Background::Background()
 
 }
 
-void Background::loadFile(const std::string& pngName, sf::RenderWindow& window)
+void Background::loadFile(const std::string& pngName)
 {
     if (!mTexture.loadFromFile(pngName))
     {
@@ -23,23 +23,21 @@ void Background::loadFile(const std::string& pngName, sf::RenderWindow& window)
 
     // Load texture to sprite
     mSprite.setTexture(mTexture);
-
-    resizePic(window.getSize());
-    
 }
 
 void Background::resizePic(sf::Vector2u windowSize)
 {
     // Fit png to window size
     sf::Vector2u textureSize = mTexture.getSize();
-
+    
     float sizeX = static_cast<float>(windowSize.x) / textureSize.x;
     float sizeY = static_cast<float>(windowSize.y) / textureSize.y;
-
+    
     mSprite.setScale(sizeX, sizeY);
 }
 
 void Background::draw(sf::RenderWindow& window)
 {
+    resizePic(window.getSize());
     window.draw(mSprite);
 }

@@ -1,23 +1,23 @@
-#ifndef WELCOME_H
-#define WELCOME_H
+#ifndef RULES_H
+#define RULES_H
 #include "states.h"
 #include "button.h"
 #include "background.h"
 
-class Welcome
+class Rules
 {
 public:
-    Welcome();
+    Rules();
     State handleInput(sf::Event& e,  sf::RenderWindow& mWindow);
     void update();
     void render(sf::RenderWindow& mWindow);
 
 
 private:
-    sf::Text mHeader;
     sf::Font mFont;
-    Button mStart;  
-    Button mRules;
+    sf::Text mHeader[2];
+    sf::Text mRuleTxt[4];
+    Button Back;  
     Background mBackground;
 };
 

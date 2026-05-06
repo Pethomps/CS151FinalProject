@@ -1,22 +1,140 @@
 #include "../header/game.h"
+#include "../header/states.h"
+#include "../header/GameOver.h"
 
-Game::Game()
+Game::Game(sf::RenderWindow &window) : mGameOver(window)
 {
+    mGameState = welcome;
+    // Use current time as seed for random generator
+    srand(time(0));
 
+    // Sound and music objects
+    mBackgroundMusic.load("./assets/Audio/western-texas-background.ogg");
+    mBackgroundMusic.play();
 }
-Game::~Game(){
 
-}
 
-void Game::handleInput(sf::RenderWindow &mWindow)
+void Game::handleInput(sf::RenderWindow &window)
 {
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            window.close();
+        }
 
-}
-void Game::update(double elapsedTime, sf::RenderWindow &mWindow)
-{
+        switch (mGameState)
+        {
+            case welcome:
+            {
+                mGameState = mWelcomeScreen.handleInput(event, window);
+                break;
+            }
+            case rules:
+            {
+                mGameState = mRules.handleInput(event, window);
+                break;
+            }
+            case cont:
+            {
+                break;
+            }
 
+            case game:
+            {
+                State nextState = mGame.handleInput(event, window);
+                if (nextState == results) {
+                    mResults.setScore(mGame.getScore());
+                }
+                mGameState = nextState;
+                break;
+            }
+            case results:
+            {
+                mGameState = mResults.handleInput(event,window);
+                State nextState = mResults.handleInput(event, window);
+                if (nextState == game)
+                {
+                    mGame.reset();
+                }
+                mGameState = nextState;
+                break;
+            }
+            case gameover:
+            {
+                mGameState = mGameOver.handleInput(event, window);
+                State nextState = mGameOver.handleInput(event, window);
+                if (nextState == game)
+                {
+                    mGame.reset();
+                }
+                mGameState = nextState;
+                break;
+            }
+            case quit:
+            {
+                window.close();
+                break;
+            }
+        }
+    }
 }
-void Game::render(sf::RenderWindow &mWindow)
+void Game::update(double elapsedTime, sf::RenderWindow &window)
 {
-    
+    switch (mGameState)
+    {
+    case welcome:
+        mWelcomeScreen.update();
+        break;
+    case rules:
+        mRules.update();
+        break;
+    case game:
+        mGame.update(elapsedTime,window);
+        if (mGame.isTimeUp()) 
+        {
+            mResults.setScore(mGame.getScore());
+            mGameState = gameover;
+        }
+        break;
+    case results:
+        mResults.update();
+        break;
+    case gameover:
+        // mGameOver.update();
+        break;
+    case quit:
+        window.close();
+        break;
+    case cont:
+        break;
+    }
+}
+void Game::render(sf::RenderWindow &window)
+{
+    window.clear(sf::Color::Black);
+    switch (mGameState)
+    {
+        case welcome:
+            mWelcomeScreen.render(window);
+            break;
+        case rules:
+            mRules.render(window);
+            break;
+        case game:
+            mGame.render(window);
+            break;
+        case results:
+            mResults.render(window);
+            break;
+        case gameover:
+            mGameOver.render(window);
+            break;
+        case quit:
+            break;
+        case cont:
+            break;
+    }
+    window.display();
 }

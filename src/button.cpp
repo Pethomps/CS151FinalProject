@@ -6,6 +6,7 @@
  */
 
 #include "../header/button.h"
+#include <SFML/Graphics.hpp>
 
 
 
@@ -34,9 +35,9 @@ Button::Button():Button("Play!", {300,100}, {1,1}, sf::Color::White)
  */
 Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Color color)
 {
-    if (!mTexture.loadFromFile("../Images/Button/button.png"))
+    if (!mTexture.loadFromFile("./assets/Button/button.png"))
     {
-        std::cout<<"Error opening texture file\n";
+        std::cout<<"Button: error opening button.png\n";
         exit(1);
     }
     // create sprite that looks like a button
@@ -55,9 +56,9 @@ Button::Button(std::string s, sf::Vector2f position, sf::Vector2f size, sf::Colo
     // set size as a ratio of original size
     mButton.setScale(size.x/imageSize.x, size.y/imageSize.y);
     // Load font
-    if (!mFont.loadFromFile("../Fonts/VintageCharm-Regular.otf"))
+    if (!mFont.loadFromFile("./assets/Fonts/VintageCharm-Regular.otf"))
     {
-        std::cout<<"Error opening font file\n";
+        std::cout<<"Button: error opening .otf file\n";
         exit(2);
     }
     mText.setFont(mFont);
@@ -88,6 +89,7 @@ void Button::setPosition(sf::Vector2f position)
     // adjust origin to the middle
     mPosition = position;
     mButton.setOrigin(imageSize.x/2, imageSize.y/2);
+    mButton.setPosition(position);
 
     // get font size based on button size
     unsigned int fontSize = mButton.getGlobalBounds().height/2;
@@ -124,6 +126,28 @@ void Button::setColor(sf::Color btnColor)
 {
     mButtonColor = btnColor;
     mButton.setColor(mButtonColor);
+}
+
+/**
+ * @brief change text color
+ * 
+ * @param btnColor new color
+ */
+void Button::setColorTextNormal(sf::Color textNormalColor)
+{
+    mTextNormal = textNormalColor;
+    mText.setFillColor(mTextNormal);
+}
+
+/**
+ * @brief change text color
+ * 
+ * @param btnColor new color
+ */
+void Button::setColorTextHover(sf::Color textHoverColor)
+{
+    mTextHover = textHoverColor;
+    mText.setFillColor(mTextNormal);
 }
 
 //change button label to s (what else needs to be changed?)
@@ -164,10 +188,12 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
         if(mouseInButton)
         {
             mBtnState = state::hovered;
+            // update();
         }
         else
         {
             mBtnState = state::normal;
+            // update();
         }
     }
     if (e.type == sf::Event::MouseButtonPressed)
@@ -177,11 +203,13 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
             if(mouseInButton)
             {
                 mBtnState = state::clicked;
+                // update();
                 return true;
             }
             else
             {
                 mBtnState = state::normal;
+                // update();
             }
         }
     }
@@ -192,10 +220,12 @@ bool Button::handleInput(sf::Event& e, sf::RenderWindow& window)
             if(mouseInButton)
             {
                 mBtnState = state::hovered;
+                // update();
             }
             else
             {
                 mBtnState = state::normal;
+                // update();
             }
         }
     }

@@ -11,15 +11,15 @@
 
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
-#include <SFML/Graphics.hpp>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 class Background{
 public:
     Background();
     ~Background(){};
 
-    void loadFile(const std::string& pngName, sf::RenderWindow& window);
+    void loadFile(const std::string& pngName);
     void resizePic(sf::Vector2u windowSize);
     void draw(sf::RenderWindow& window);
 
