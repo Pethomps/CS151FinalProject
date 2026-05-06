@@ -105,7 +105,7 @@ int main()
     }
 
     // Testing backgorund class
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
+    // sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
 
     Background background;
     background.loadFile("Images/Background/Background1.png", window);
