@@ -31,6 +31,13 @@ int main()
         game.update(dt, window);
         game.render(window); 
     }
+
+    // Testing backgorund class
+    // sf::RenderWindow window(sf::VideoMode(800, 600), "Background Class Test");
+
+    // Background background;
+    // background.loadFile("Images/Background/Background1.png", window);
+
     
     return 0;
 }
