@@ -1,26 +1,17 @@
+/**
+ * @file weapon.h
+ * @author Target Acquisition Group
+ * @brief Weapon class handles the firing point. 
+ * 
+ */
+
 #ifndef WEAPON_H
 #define WEAPON_H
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include "bullet.h"
 
-class Bullet
-{
-private:
-    sf::Texture mTexture;
-    sf::Sprite mSprite; 
-    sf::Vector2f mVelocity;
-    bool mAlive;
-
-public:
-    Bullet(sf::Vector2f startPos, sf::Vector2f direction, float speed);
-
-    void update(float dt);
-    void render(sf::RenderWindow& window) const;
-    sf::FloatRect getBounds() const;
-    bool isAlive() const;
-    void destroy();
-};
 
 class Weapon
 {
