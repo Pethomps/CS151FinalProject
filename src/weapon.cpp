@@ -37,23 +37,48 @@
     Bullet::Bullet(sf::Vector2f startPos, sf::Vector2f direction, float speed)
         : mAlive(true)
     {
-    if (!mTexture.loadFromFile("Images/Weapon/cat.png"))
-    {
-        std::cout << "Failed to load cat texture\n";
+        if (!mTexture.loadFromFile("./assets/target/cat2.png"))
+        {
+            std::cout << "Failed to load cat texture\n";
+        }
+
+        mSprite.setTexture(mTexture);
+        mSprite.setScale(0.15f, 0.15f);
+
+        mSprite.setOrigin(
+        mSprite.getLocalBounds().width / 2.f,
+        mSprite.getLocalBounds().height / 2.f
+        );
+
+        mSprite.setPosition(startPos);
+
+        mVelocity = direction * speed;
     }
 
-    mSprite.setTexture(mTexture);
-    mSprite.setScale(0.05f, 0.05f);
+    Bullet::Bullet(Bullet&& other) noexcept : 
+            mTexture(std::move(other.mTexture)),
+            mSprite(std::move(other.mSprite)),
+            mVelocity(other.mVelocity), 
+            mAlive(other.mAlive)
+    {
+        //Re-binding after move
+        mSprite.setTexture(mTexture, true);
+    }
 
-    mSprite.setOrigin(
-    mSprite.getLocalBounds().width / 2.f,
-    mSprite.getLocalBounds().height / 2.f
-    );
+    Bullet& Bullet::operator=(Bullet&& other) noexcept 
+    {
+        if (this != &other)
+        {
+            mTexture = std::move(other.mTexture);
+            mSprite = std::move(other.mSprite);
+            mVelocity = other.mVelocity;
+            mAlive = other.mAlive;
 
-    mSprite.setPosition(startPos);
-
-    mVelocity = direction * speed;
-}
+            // Rebind after move
+            mSprite.setTexture(mTexture, true);
+        }
+        return *this;
+    }
 
     void Bullet::update(float dt)
     {
