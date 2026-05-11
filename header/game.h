@@ -1,3 +1,10 @@
+/**
+ * @file game.h
+ * @author Target Acquisition Group
+ * @brief Game class controls state-flow of the game.
+ * 
+ */
+
 #ifndef GAME_H
 #define GAME_H
 #include <SFML/Graphics.hpp>

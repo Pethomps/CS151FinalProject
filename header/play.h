@@ -1,3 +1,10 @@
+/**
+ * @file play.h
+ * @author Target Acquisition Group
+ * @brief Play class handles playing the game.
+ * 
+ */
+
 #ifndef PLAY_H
 #define PLAY_H
 #include "states.h"

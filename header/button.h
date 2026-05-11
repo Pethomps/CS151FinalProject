@@ -1,7 +1,7 @@
 /**
  * @file button.h
  * @author Target Acquisition Group
- * @brief Button class header file
+ * @brief Button class provides uniform buttons for the game.
  * 
  */
 

@@ -1,7 +1,7 @@
 /**
  * @file Sound.h
  * @author Target Acquisition Group
- * @brief 
+ * @brief Sound class creates and handles in-game sound effects.
  * 
  * @date 2026-04-25
  * 

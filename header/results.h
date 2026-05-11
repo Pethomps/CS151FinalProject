@@ -1,3 +1,10 @@
+/**
+ * @file results.h
+ * @author Target Acquisition Group
+ * @brief Results class handles game-score and display.
+ * 
+ */
+
 #ifndef RESULTS_H
 #define RESULTS_H
 

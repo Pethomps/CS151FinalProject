@@ -1,3 +1,10 @@
+/**
+ * @file welcome.h
+ * @author Target Acquisition Group
+ * @brief Welcome class handles main menu function and display.
+ * 
+ */
+
 #ifndef WELCOME_H
 #define WELCOME_H
 #include "states.h"
