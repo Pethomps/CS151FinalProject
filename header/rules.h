@@ -1,3 +1,10 @@
+/**
+ * @file rules.h
+ * @author Target Acquisition Group
+ * @brief Rules class handles and displays game-rules menu.
+ * 
+ */
+
 #ifndef RULES_H
 #define RULES_H
 #include "states.h"

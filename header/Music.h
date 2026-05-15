@@ -1,7 +1,7 @@
 /**
  * @file Music.h
  * @author Target Acquisition Group
- * @brief 
+ * @brief Music class creates musical element for the game.
  * 
  * @date 2026-04-25
  * 

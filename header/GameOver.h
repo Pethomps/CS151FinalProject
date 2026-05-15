@@ -1,7 +1,7 @@
 /**
  * @file gameOver.h
  * @author Target Acquisition Group
- * @brief 
+ * @brief GameOver class handles the end-of-game.
  * @version 0.1
  * @date 2026-04-16
  * 

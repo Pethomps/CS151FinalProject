@@ -37,6 +37,7 @@
 *.out
 *.app
 game
+TESTS/test  
 
 # debug information files
 *.dwo
